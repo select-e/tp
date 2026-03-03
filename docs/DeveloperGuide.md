@@ -262,14 +262,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This product is for delivery workers of a restaurant in Central Singapore.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+Our platform streamlines logistics by tagging orders by region for efficient batch lookups, while providing visual analytics for trending items. While the app identifies customers within the same area for convenience, it does not provide specific route planning for delivery workers.
 
 ### User stories
 
