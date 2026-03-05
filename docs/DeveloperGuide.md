@@ -326,7 +326,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: An individual or business entity stored in the application for reference. In this project, a contact refers to a customer.
+* **Orders**: In this project, customer orders are stored in a different list than the contact list.
+* **Region Tag**: A geographical area used to categorise delivery locations. In this project, region refers specifically to one of the following values: North, North-East, West, East, Central.
 
 --------------------------------------------------------------------------------------------------------------------
 
