@@ -1,9 +1,13 @@
 package seedu.address.model.order;
 
-import java.time.LocalDate;
-
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+
+/**
+ * Represents an OrderDate of an Order.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class OrderDate {
     public final LocalDate value;
 

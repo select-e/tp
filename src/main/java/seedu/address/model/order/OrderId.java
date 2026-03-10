@@ -3,6 +3,10 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the ID of an order in the system.
+ * Guarantees: immutable; is valid as declared in {@link #isValidOrderId(String)}
+ */
 public class OrderId {
     public static final String MESSAGE_CONSTRAINTS =
             "Order ID should only contain positive integers.";

@@ -3,6 +3,10 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the Price of an Order.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
+ */
 public class Price {
     public static final String MESSAGE_CONSTRAINTS =
             "Price must be a positive number.";

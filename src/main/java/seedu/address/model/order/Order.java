@@ -1,14 +1,14 @@
 package seedu.address.model.order;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Order in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Order {
@@ -24,7 +24,8 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(OrderId orderId, Person person, Product product, Quantity quantity, Price price, OrderStatus status, OrderDate orderDate) {
+    public Order(OrderId orderId, Person person, Product product, Quantity quantity,
+                 Price price, OrderStatus status, OrderDate orderDate) {
         requireAllNonNull(orderId, product, quantity, price, status, orderDate);
         this.orderId = orderId;
         this.person = person;

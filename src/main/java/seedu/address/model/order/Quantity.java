@@ -3,6 +3,10 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the Quantity of the Product ordered.
+ * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
+ */
 public class Quantity {
     public static final String MESSAGE_CONSTRAINTS =
             "Quantity must be a positive integer.";

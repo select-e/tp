@@ -3,6 +3,10 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the Product ordered.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Product {
     public static final String MESSAGE_CONSTRAINTS =
             "Product names should not be blank.";
