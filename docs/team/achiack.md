@@ -8,7 +8,7 @@ title: John Doe's Project Portfolio Page
 FoodBridge - Our platform streamlines logistics by tagging orders by region for efficient batch lookups.
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
@@ -21,7 +21,6 @@ Given below are my contributions to the project.
   * Developer Guide:
 
 * **Community**:
-* 
 * **Tools**:
 
 * _{you can add/remove categories in the list above}_

@@ -264,7 +264,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 This product is for delivery workers of a restaurant in Central Singapore.
 
-**Value proposition**: 
+**Value proposition**:
 
 Our platform streamlines logistics by tagging orders by region for efficient batch lookups, while providing visual analytics for trending items. While the app identifies customers within the same area for convenience, it does not provide specific route planning for delivery workers.
 
@@ -274,7 +274,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                               | I want to …​                                       | So that I can…​                                                        |
 | ------ |----------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------|
-| `* * *` | user                                                     | add a new contact with name, address and phone number | record the customer's details to the system.                              | 
+| `* * *` | user                                                     | add a new contact with name, address and phone number | record the customer's details to the system.                              |
 | `* * *` | user                                                     | delete a contact                                      | remove contacts from the system that no longer order from the restaurant. |
 | `* * *` | user                                                     | add an order                                          | save the details of an order and the customer who ordered it.             |
 | `* * *` | user                                                     | delete an order                                       | remove wrongly-keyed orders in the system.                                |
@@ -311,30 +311,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The number given is invalid.
-  
+
   * 2a1. Food Bridge shows an error message.
-    
+
     Use case resumes at step 1.
 
 
 * 2b. The address given is invalid.
-  
+
   * 2b1. Food Bridge shows an error message.
-    
+
     Use case resumes at step 1.
 
 
 * 2c. No order is given.
-  
+
   * 2c1. Food Bridge shows an error message.
-    
+
     Use case resumes at step 1.
 
 
 * 2d. Contact is a duplicate - all information exactly matches a contact already in the list.
-  
+
   * 2d1. Food Bridge adds the order to the already-stored contact.
-    
+
     Use case ends.
 
 
@@ -369,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons.
 2.  Food Bridge shows a list of persons.
-    
+
     Use case ends.
 
 **Extensions**
@@ -385,13 +385,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list orders.
 2.  Food Bridge shows a list of orders, and the details of the customer who made the order.
-    
+
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty. 
-  
+* 2a. The list is empty.
+
   Use case ends.
 
 *{More to be added}*
