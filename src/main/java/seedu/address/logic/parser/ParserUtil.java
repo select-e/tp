@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Region;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -71,13 +72,21 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
+    public static Address parseAddress(String postalCode, String unit) throws ParseException {
+        requireNonNull(postalCode);
+        String trimmedPostalCode = postalCode.trim();
+        if (!Address.isValidAddress(trimmedPostalCode)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        if (unit.isBlank()) {
+            return new Address(trimmedPostalCode);
+        } else {
+            String trimmedUnit = unit.trim();
+            if (!Address.isValidUnit(trimmedUnit)) {
+                throw new ParseException(Address.MESSAGE_CONSTRAINTS_UNIT);
+            }
+            return new Address(trimmedPostalCode, trimmedUnit);
+        }
     }
 
     /**
@@ -93,6 +102,15 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    public static Region parseRegion(String region) throws ParseException {
+        requireNonNull(region);
+        String trimmedRegion = region.trim();
+        if (!Region.isValidRegion(trimmedRegion)) {
+            throw new ParseException(Region.MESSAGE_CONSTRAINTS);
+        }
+        return new Region(trimmedRegion);
     }
 
     /**
