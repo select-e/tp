@@ -4,7 +4,7 @@ title: John Doe's Project Portfolio Page
 ---
 
 ### Project: Food Bridge
- 
+
 Food Bridge is a desktop address book application used for streamlining food deliveries. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 
 Given below are my contributions to the project.
