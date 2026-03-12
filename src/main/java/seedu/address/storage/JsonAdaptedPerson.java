@@ -107,15 +107,20 @@ class JsonAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address.substring(0,5))) {
+        if (!Address.isValidAddress(address.substring(0,6))) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        if (address.contains(", ")) {
-            if (!Address.isValidUnit(address.substring(8))) {
+
+        Address modelAddress = null;
+
+        if (address.contains("=")) {
+            if (!Address.isValidUnit(address.substring(7))) {
                 throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS_UNIT);
             }
+            modelAddress = new Address(address.substring(0,6), address.substring(7));
+        } else {
+            modelAddress = new Address(address.substring(0,6));
         }
-        final Address modelAddress = new Address(address);
 
         if (!Region.isValidRegion(region)) {
             throw new IllegalValueException(Region.MESSAGE_CONSTRAINTS);

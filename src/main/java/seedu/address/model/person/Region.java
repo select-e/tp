@@ -11,8 +11,8 @@ public class Region {
     public String value;
 
     public Region(String region) {
-        requireNonNull(value);
-        checkArgument(isValidRegion(value), MESSAGE_CONSTRAINTS);
+        requireNonNull(region);
+        checkArgument(isValidRegion(region), MESSAGE_CONSTRAINTS);
         this.value = region;
     }
 
