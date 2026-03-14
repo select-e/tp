@@ -56,6 +56,10 @@ public class JsonAdaptedOrder {
         orderDate = source.getDate().toString();
     }
 
+    public String getPersonName() {
+        return personName;
+    }
+
     public Order toModelType(Person person) throws IllegalValueException {
         return new Order(
                 new OrderId(orderId),

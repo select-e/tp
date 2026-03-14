@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,13 +23,15 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedOrder> orders = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("orders") List<JsonAdaptedOrder> orders) {
         this.persons.addAll(persons);
+        this.orders.addAll(orders);
     }
 
     /**
@@ -37,7 +40,13 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getPersonList().stream()
+                .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
+
+        orders.addAll(source.getOrderList().stream()
+                .map(JsonAdaptedOrder::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +62,16 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (JsonAdaptedOrder jsonOrder : orders) {
+
+            Person person = addressBook.getPersonList().stream()
+                    .filter(p -> p.getName().toString().equals(jsonOrder.getPersonName()))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalValueException("Person not found for order"));
+
+            Order order = jsonOrder.toModelType(person);
+            addressBook.addOrder(order);
         }
         return addressBook;
     }
