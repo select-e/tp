@@ -10,11 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNO;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -62,12 +64,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         String postalCode = argMultimap.getValue(PREFIX_ADDRESS).get();
         Address address = ParserUtil.parseAddress(postalCode, unit);
         Region region = ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get());
-        String order = argMultimap.getValue(PREFIX_ORDERS).get();
+        Map<Integer, Integer> order = ParserUtil.parseOrders(argMultimap.getAllValues(PREFIX_ORDERS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, region, order, tagList);
+        Person person = new Person(name, phone, email, address, region, tagList);
 
-        return new AddCommand(person);
+        Order newOrder = new Order(person, order);
+
+        return new AddCommand(person, newOrder);
     }
 
     /**
