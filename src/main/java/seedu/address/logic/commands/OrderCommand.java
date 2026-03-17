@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Map;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
@@ -37,7 +38,7 @@ public class OrderCommand extends Command {
         Order toAdd = new Order(person, this.order);
         model.addOrder(toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
