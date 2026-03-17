@@ -3,22 +3,23 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents an OrderDate of an Order.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class OrderDate {
-    public final LocalDate value;
+public class OrderDateTime {
+    public final LocalDateTime value;
 
     /**
-     * Constructs an {@code OrderDate}.
+     * Constructs an {@code OrderDateTime}.
      *
-     * @param date A valid date.
+     * @param datetime A valid datetime.
      */
-    public OrderDate(LocalDate date) {
-        requireNonNull(date);
-        value = date;
+    public OrderDateTime(LocalDateTime datetime) {
+        requireNonNull(datetime);
+        value = datetime;
     }
 
     @Override
@@ -29,8 +30,8 @@ public class OrderDate {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof OrderDate
-                && value.equals(((OrderDate) other).value));
+                || (other instanceof OrderDateTime
+                && value.equals(((OrderDateTime) other).value));
     }
 
     @Override
