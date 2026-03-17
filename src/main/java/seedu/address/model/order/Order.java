@@ -2,6 +2,8 @@ package seedu.address.model.order;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,27 +15,30 @@ import seedu.address.model.person.Person;
  */
 public class Order {
 
+    private static int orderIdx = 0;
     private final OrderId orderId;
     private final Person person;
-    private final Product product;
-    private final Quantity quantity;
-    private final Price price;
+    // private final Product product;
+    // private final Quantity quantity;
+    // private final Price price;
+    private final Map<Integer, Integer> orders;
     private final OrderStatus status;
-    private final OrderDate orderDate;
+    private final OrderDateTime orderDatetime;
 
     /**
      * Every field must be present and not null.
      */
-    public Order(OrderId orderId, Person person, Product product, Quantity quantity,
-                 Price price, OrderStatus status, OrderDate orderDate) {
-        requireAllNonNull(orderId, product, quantity, price, status, orderDate);
-        this.orderId = orderId;
+    public Order(Person person, Map<Integer, Integer> orders) {
+        requireAllNonNull(person, orders);
+        this.orderId = new OrderId(Integer.toString(orderIdx));
         this.person = person;
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-        this.status = status;
-        this.orderDate = orderDate;
+        // this.product = product;
+        // this.quantity = quantity;
+        // this.price = price;
+        this.orders = orders;
+        this.status = OrderStatus.PENDING;
+        this.orderDatetime = new OrderDateTime(LocalDateTime.now());
+        orderIdx ++;
     }
 
     public OrderId getOrderId() {
@@ -44,7 +49,7 @@ public class Order {
         return person;
     }
 
-    public Product getProduct() {
+    /** public Product getProduct() {
         return product;
     }
 
@@ -54,14 +59,18 @@ public class Order {
 
     public Price getPrice() {
         return price;
+    } **/
+
+    public Map<Integer, Integer> getOrders() {
+        return orders;
     }
 
     public OrderStatus getOrderStatus() {
         return status;
     }
 
-    public OrderDate getDate() {
-        return orderDate;
+    public OrderDateTime getDate() {
+        return orderDatetime;
     }
 
     /**
@@ -92,14 +101,14 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return orderId.equals(otherOrder.orderId)
-                && product.equals(otherOrder.product)
-                && quantity.equals(otherOrder.quantity);
+        return orderId.equals(otherOrder.orderId);
+//                && product.equals(otherOrder.product)
+//                && quantity.equals(otherOrder.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, product, quantity);
+        return Objects.hash(orderId); //, product, quantity);
     }
 
     @Override
@@ -107,11 +116,13 @@ public class Order {
         return new ToStringBuilder(this)
                 .add("orderId", orderId)
                 .add("person", person)
+/**
                 .add("product", product)
                 .add("quantity", quantity)
                 .add("price", price)
+ **/
                 .add("status", status)
-                .add("orderDate", orderDate)
+                .add("orderDatetime", orderDatetime)
                 .toString();
     }
 }
