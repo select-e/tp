@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -147,5 +149,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> orders} into a {@code Map<Integer, Integer>}.
+     */
+    public static Map<Integer, Integer> parseOrders(Collection<String> orders) throws ParseException {
+        requireNonNull(orders);
+        final Map<Integer, Integer> orderMap = new HashMap<>();
+        for (String order : orders) {
+            int product = Integer.parseInt(order.split(" ")[0]);
+            int quantity = Integer.parseInt(order.split(" ")[1]);
+            orderMap.put(product, quantity);
+        }
+        return orderMap;
     }
 }
