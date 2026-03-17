@@ -73,11 +73,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String postalCode, String unit) throws ParseException {
-        requireNonNull(postalCode);
-        String trimmedPostalCode = postalCode.trim();
-        if (!Address.isValidAddress(trimmedPostalCode)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
+        String trimmedPostalCode = parsePostalCode(postalCode);
         if (unit.isBlank()) {
             return new Address(trimmedPostalCode);
         } else {
@@ -87,6 +83,39 @@ public class ParserUtil {
             }
             return new Address(trimmedPostalCode, trimmedUnit);
         }
+    }
+
+    /**
+     * Parses a {@code String postalCode} into a valid {@code String postalCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code postalCode} is invalid.
+     */
+    public static String parsePostalCode(String postalCode) throws ParseException {
+        requireNonNull(postalCode);
+        String trimmedPostalCode = postalCode.trim();
+        if (!Address.isValidAddress(trimmedPostalCode)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedPostalCode;
+    }
+
+    /**
+     * Parses a {@code String unitNo} into a valid {@code String unitNo}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code unitNo} is invalid.
+     */
+    public static String parseUnitNo(String unitNo) throws ParseException {
+        requireNonNull(unitNo);
+        if (unitNo.isBlank()) {
+            return "";
+        }
+        String trimmedUnitNo = unitNo.trim();
+        if (!Address.isValidUnit(trimmedUnitNo)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedUnitNo;
     }
 
     /**
@@ -120,6 +149,18 @@ public class ParserUtil {
             throw new ParseException(Region.MESSAGE_CONSTRAINTS);
         }
         return new Region(trimmedRegion);
+    }
+
+    /**
+     * Parses a {@code String order} into a {@code String order}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code order} is invalid.
+     */
+    public static String parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        return trimmedOrder;
     }
 
     /**

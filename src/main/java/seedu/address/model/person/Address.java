@@ -21,7 +21,7 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "\\d{6}";
-    public static final String VALIDATION_REGEX_UNIT = "[#]\\d{2}[-]\\d{2,3}";
+    public static final String VALIDATION_REGEX_UNIT = "^$|[#]\\d{2}[-]\\d{2,3}";
 
     public final Pair<String, String> value;
 

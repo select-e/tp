@@ -31,6 +31,20 @@ public class Person {
     /**
      * Every field except email must be present and not null.
      */
+    public Person(Name name, Phone phone, Address address, Region region, ArrayList<String> order, Set<Tag> tags) {
+        requireAllNonNull(name, phone, address, region, order, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = new Email("");
+        this.address = address;
+        this.region = region;
+        this.orders.addAll(order);
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field except email must be present and not null. Old constructor that includes email.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Region region, String order, Set<Tag> tags) {
         requireAllNonNull(name, phone, address, region, order, tags);
         this.name = name;
@@ -124,7 +138,6 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && region.equals(otherPerson.region)
                 && tags.equals(otherPerson.tags);
@@ -133,7 +146,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, region, tags);
+        return Objects.hash(name, phone, address, region, tags);
     }
 
     @Override
@@ -141,7 +154,6 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
                 .add("address", address)
                 .add("region", region)
                 .add("orders", orders)
