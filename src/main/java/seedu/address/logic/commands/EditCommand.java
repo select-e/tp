@@ -48,11 +48,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_UNITNO + "UNIT] "
             + "[" + PREFIX_REGION + "REGION]\n"
-            + "[" + PREFIX_ORDERS + "ORDER]...\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_ORDERS + "chicken rice";
+            + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Contact edited successfully.\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -106,11 +104,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Region updatedRegion = editPersonDescriptor.getRegion().orElse(personToEdit.getRegion());
-        ArrayList<String> updatedOrders = editPersonDescriptor.getOrders().orElse(personToEdit.getOrders());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegion,
-                updatedOrders, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegion, updatedTags);
     }
 
     @Override
@@ -148,7 +144,6 @@ public class EditCommand extends Command {
         private Address address;
         private Region region;
         private Set<Tag> tags;
-        private ArrayList<String> order;
 
         public EditPersonDescriptor() {}
 
@@ -163,7 +158,6 @@ public class EditCommand extends Command {
             setRegion(toCopy.region);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setOrder(toCopy.order);
         }
 
         /**
@@ -213,14 +207,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(region);
         }
 
-        public void setOrder(ArrayList<String> order) {
-            this.order = order;
-        }
-
-        public Optional<ArrayList<String>> getOrders() {
-            return Optional.ofNullable(order);
-        }
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -266,7 +252,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("region", region)
-                    .add("orders", order)
                     .add("tags", tags)
                     .toString();
         }
