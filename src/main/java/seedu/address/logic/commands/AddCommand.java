@@ -68,7 +68,7 @@ public class AddCommand extends Command {
         model.addPerson(toAdd);
         model.addOrder(newOrder);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), newOrder.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(newOrder)));
     }
 
     @Override
