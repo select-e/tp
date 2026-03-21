@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMERIDX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
 
 import java.util.Map;
 
@@ -12,13 +14,13 @@ import seedu.address.model.person.Person;
 /** for adding a new order with a returning customer **/
 
 public class OrderCommand extends Command {
-    public static final String COMMAND_WORD = "order";
+    public static final String COMMAND_WORD = "addorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": adds a new order made by a returning customer. "
             + "Parameters: CUSTOMER_INDEX (must be a positive integer) "
-            + "o/ [PRODUCT QUANTITY]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "o/ 1 1 o/ 2 4 \n"
+            + "o/ [MENU_ITEM PRODUCT_QUANTITY]\n"
+            + "Example: " + COMMAND_WORD + PREFIX_CUSTOMERIDX + " 1 " + PREFIX_ORDERS + "1 1" + PREFIX_ORDERS + "2 4\n"
             + "This means customer 1 ordered 1 of menu item 1 and 4 of menu item 2.";
 
     public static final String MESSAGE_SUCCESS = "New order added: %1$s.";
