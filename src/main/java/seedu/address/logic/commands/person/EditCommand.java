@@ -269,6 +269,7 @@ public class EditCommand extends Command {
                     && Objects.equals(postalCode, otherEditPersonDescriptor.postalCode)
                     && Objects.equals(unitNo, otherEditPersonDescriptor.unitNo)
                     && Objects.equals(region, otherEditPersonDescriptor.region)
+                    && Objects.equals(order, otherEditPersonDescriptor.order)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
