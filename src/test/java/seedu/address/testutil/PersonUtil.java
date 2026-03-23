@@ -11,8 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNO;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.person.AddCommand;
+import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -56,6 +56,13 @@ public class PersonUtil {
         descriptor.getPostalCode().ifPresent(postalCode -> sb.append(PREFIX_ADDRESS).append(postalCode).append(" "));
         descriptor.getUnitNo().ifPresent(unitNo -> sb.append(PREFIX_UNITNO).append(unitNo).append(" "));
         descriptor.getRegion().ifPresent(region -> sb.append(PREFIX_REGION).append(region.getValue()).append(" "));
+        descriptor.getOrders().ifPresent(orders -> {
+            if (orders.isEmpty()) {
+                sb.append(PREFIX_ORDERS);
+            } else {
+                orders.forEach(order -> sb.append(PREFIX_ORDERS).append(order).append(" "));
+            }
+        });
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
