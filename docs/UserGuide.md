@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Food Bridge is a **desktop app for managing contacts and orders for restaurants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 * Table of Contents
 {:toc}
@@ -15,11 +15,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-T12-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your Food Bridge Application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar food-bridge-[version].jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -28,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `addperson n/John Doe p/98765432 a/111111 u/#01-01 r/N` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -178,12 +178,19 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: Can I add multiple products in one order?
+**A**: Yes. Use the `addorder` command and add as many orders you want with the `o/` prefix
+
+**Q**: What happens if I delete a customer with existing orders?
+**A**: Deleting a customer does not automatically delete their orders. This may result in orphaned orders.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you delete a contact**, it does not delete the orders associated with it, which may lead to inconsistent data.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -191,10 +198,17 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Contact** | `addperson n/NAME p/PHONE_NUMBER a/ADDRESS u/UNIT_NO r/REGION` <br> e.g., `addperson n/John Doe p/98765432 a/111111 u/#01-01 r/N`
+**Delete Contact** | `deleteperson INDEX`<br> e.g., `deleteperson 3`
+**Edit Contact** | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find Region** | `find REGION`<br> e.g., `find N`
+**List Contacts** | `listperson`
+**Add Order** | `addorder c/CUSTOMER_INDEX o/MENU_ITEM QUANTITY_ORDERED…​` <br> e.g., `addorder c/1 o/2 5` `addorder c/2 o/1 1 o/2 3 o/4 2`
+**Delete Order** | `deleteorder INDEX`<br> e.g., `deleteorder 3`
+**Edit Order** | `editorder INDEX o/MENU_ITEM PRODUCT_QUANTITY…​` <br> e.g.,`editorder 1 o/1 1 o/2 4` `editorder 2 o/2 0`
+**List Order** | `listorder`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Undo** | `undo`
+**Redo** | `redo`
 **Help** | `help`
+**Exit** | `exit`
