@@ -213,12 +213,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+ Action               | Format, Examples                                                                                                                                                      
+----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Clear**            | `clear`                                                                                                                                                               
+ **Delete**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
+ **Edit Person**      | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [u/UNIT] [r/REGION] [t/TAG]…​` <br> e.g.,`editperson 1 p/91234567 r/E`                                        
+ **Find**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
+ **List Person List** | `listperson`                                                                                                                                                          
+ **Edit Order**       | `editorder INDEX o/MENU_ITEM PRODUCT_QUANTITY…​` <br> e.g., `editorder 1 o/1 1 o/2 4`                                                                                 |
+ **Help**             | `help`                                                                                                                                                                
