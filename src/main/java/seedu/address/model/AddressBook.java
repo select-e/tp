@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.UniqueOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -50,6 +50,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+    }
+
+    /**
+     * Replaces the contents of the order list with {@code orders}.
+     * {@code orders} must not contain duplicate orders.
+     */
+    public void setOrders(List<OrderMap> orders) {
+        this.orders.setOrders(orders);
     }
 
     /**
@@ -103,7 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds an order to the address book.
      * The order must not already exist in the address book.
      */
-    public void addOrder(Order o) {
+    public void addOrder(OrderMap o) {
         orders.add(o);
     }
 
@@ -112,32 +120,24 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The orderId of {@code editedOrder} must not be the same as another existing order in the address book.
      */
-    public void setOrder(Order target, Order editedOrder) {
+    public void setOrder(OrderMap target, OrderMap editedOrder) {
         requireNonNull(editedOrder);
 
         orders.setOrder(target, editedOrder);
     }
 
     /**
-     * Replaces the contents of the order list with {@code orders}.
-     * {@code orders} must not contain duplicate orders.
-     */
-    public void setOrders(List<Order> orders) {
-        this.orders.setOrders(orders);
-    }
-
-    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeOrder(Order key) {
+    public void removeOrder(OrderMap key) {
         orders.remove(key);
     }
 
     /**
      * Returns true if an order with the same id as {@code order} exists in the address book.
      */
-    public boolean hasOrder(Order order) {
+    public boolean hasOrder(OrderMap order) {
         requireNonNull(order);
         return orders.contains(order);
     }
@@ -148,6 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("orders", orders)
                 .toString();
     }
 
@@ -157,7 +158,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Order> getOrderList() {
+    public ObservableList<OrderMap> getOrderList() {
         return orders.asUnmodifiableObservableList();
     }
 
@@ -173,11 +174,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && orders.equals(otherAddressBook.orders);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return java.util.Objects.hash(persons, orders);
     }
 }

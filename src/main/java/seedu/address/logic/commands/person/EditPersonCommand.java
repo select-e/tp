@@ -39,7 +39,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editperson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -110,11 +110,9 @@ public class EditPersonCommand extends Command {
         String updatedUnitNo = editPersonDescriptor.getUnitNo().orElse(personToEdit.getAddress().getUnit());
         Address updatedAddress = new Address(updatedPostalCode, updatedUnitNo);
         Region updatedRegion = editPersonDescriptor.getRegion().orElse(personToEdit.getRegion());
-        ArrayList<String> updatedOrders = editPersonDescriptor.getOrders().orElse(personToEdit.getOrders());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedAddress, updatedRegion,
-                updatedOrders, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedAddress, updatedRegion,updatedTags);
     }
 
     @Override

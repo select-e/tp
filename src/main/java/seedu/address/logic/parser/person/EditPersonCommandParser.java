@@ -18,8 +18,18 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/person/EditCommandParser.java
 import seedu.address.logic.commands.person.EditPersonCommand;
 import seedu.address.logic.commands.person.EditPersonCommand.EditPersonDescriptor;
+=======
+<<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/person/EditCommandParser.java
+import seedu.address.logic.commands.person.EditCommand;
+import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
+========
+import seedu.address.logic.commands.person.EditPersonCommand;
+import seedu.address.logic.commands.person.EditPersonCommand.EditPersonDescriptor;
+>>>>>>>> master:src/main/java/seedu/address/logic/parser/person/EditPersonCommandParser.java
+>>>>>>> add-orders:src/main/java/seedu/address/logic/parser/person/EditPersonCommandParser.java
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -28,27 +38,40 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditPersonCommand object
  */
+<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/person/EditCommandParser.java
 public class EditCommandParser implements Parser<EditPersonCommand> {
+=======
+public class EditPersonCommandParser implements Parser<EditPersonCommand> {
+>>>>>>> add-orders:src/main/java/seedu/address/logic/parser/person/EditPersonCommandParser.java
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditPersonCommand
+     * and returns an EditPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditPersonCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+<<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/person/EditCommandParser.java
+                        PREFIX_ADDRESS, PREFIX_UNITNO, PREFIX_REGION, PREFIX_TAG);
+========
                         PREFIX_ADDRESS, PREFIX_UNITNO, PREFIX_REGION, PREFIX_ORDERS, PREFIX_TAG);
+>>>>>>>> master:src/main/java/seedu/address/logic/parser/person/EditPersonCommandParser.java
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
+<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/person/EditCommandParser.java
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE), pe);
+=======
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE), pe);
+>>>>>>> add-orders:src/main/java/seedu/address/logic/parser/person/EditPersonCommandParser.java
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,

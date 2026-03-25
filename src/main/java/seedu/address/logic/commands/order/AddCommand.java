@@ -1,79 +1,48 @@
 package seedu.address.logic.commands.order;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMERIDX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNO;
 
-import seedu.address.commons.util.ToStringBuilder;
+import java.util.Map;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Person;
 
-/**
- * Adds a person to the address book.
- */
+/** for adding a new order with a returning customer **/
+
 public class AddCommand extends Command {
+    public static final String COMMAND_WORD = "addorder";
 
-    public static final String COMMAND_WORD = "add";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": adds a new order made by a returning customer. "
+            + "Parameters: " + PREFIX_CUSTOMERIDX + "CUSTOMER_INDEX (must be a positive integer) "
+            + "o/ [MENU_ITEM PRODUCT_QUANTITY]\n"
+            + "Example: " + COMMAND_WORD + PREFIX_CUSTOMERIDX + " 1 " + PREFIX_ORDERS + "1 1" + PREFIX_ORDERS + "2 4\n"
+            + "This means customer 1 ordered 1 of menu item 1 and 4 of menu item 2.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_UNITNO + "UNIT_NUMBER]"
-            + PREFIX_REGION + "REGION "
-            + PREFIX_ORDERS + "ORDERS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_ADDRESS + "112233 "
-            + PREFIX_UNITNO + "#02-01 "
-            + PREFIX_REGION + "N "
-            + PREFIX_ORDERS + "chicken rice";
+    public static final String MESSAGE_SUCCESS = "New order added: %1$s.";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    private final int index;
+    private final Map<Integer, Integer> order;
 
-    private final Person toAdd;
-
-    /**
-     * Creates an AddCommand to add the specified {@code Person}
-     */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(int index, Map<Integer, Integer> order) {
+        requireAllNonNull(index, order);
+        this.index = index;
+        this.order = order;
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(Model model) {
+        Person person = model.getFilteredPersonList().get(index);
+        OrderMap toAdd = new OrderMap(person, this.order);
+        model.addOrder(toAdd);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
-    }
-
-    @Override
-    public boolean shouldRecordInHistory() {
-        return true;
-    }
-
-    @Override
-    public boolean mutatesModel() {
-        return true;
     }
 
     @Override
@@ -87,14 +56,7 @@ public class AddCommand extends Command {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+        AddCommand e = (AddCommand) other;
+        return index == e.index && order.equals(e.order);
     }
 }

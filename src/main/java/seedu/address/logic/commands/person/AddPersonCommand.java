@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
  */
 public class AddPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addperson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -31,15 +31,13 @@ public class AddPersonCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_UNITNO + "UNIT_NUMBER]"
             + PREFIX_REGION + "REGION "
-            + PREFIX_ORDERS + "ORDERS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ADDRESS + "112233 "
             + PREFIX_UNITNO + "#02-01 "
-            + PREFIX_REGION + "N "
-            + PREFIX_ORDERS + "chicken rice";
+            + PREFIX_REGION + "N ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -47,7 +45,7 @@ public class AddPersonCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPersonCommand to add the specified {@code Person}
      */
     public AddPersonCommand(Person person) {
         requireNonNull(person);

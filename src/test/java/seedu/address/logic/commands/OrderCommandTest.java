@@ -1,27 +1,23 @@
-package seedu.address.logic.commands.order;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.person.AddPersonCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -29,18 +25,26 @@ import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/person/AddPersonCommandTest.java
+public class AddPersonCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));
+========
+public class OrderCommandTest {
+
+    @Test
+    public void constructor_nullOrder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new OrderCommand(1, null));
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/commands/OrderCommandTest.java
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_orderAcceptedByModel_addSuccessful() {
+        ModelStubAcceptingOrderAdded modelStub = new ModelStubAcceptingOrderAdded();
 
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/person/AddPersonCommandTest.java
         CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
@@ -54,33 +58,67 @@ public class AddCommandTest {
         AddPersonCommand addCommand = new AddPersonCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        Executable executeCommand = () -> addCommand.execute(modelStub);
-        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, executeCommand);
+        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+========
+        Map<Integer, Integer> orderMap = new HashMap<>();
+        orderMap.put(1, 2);
+
+        OrderCommand orderCommand = new OrderCommand(1, orderMap);
+
+        CommandResult commandResult = orderCommand.execute(modelStub);
+
+        Order expectedOrder = new Order(modelStub.getFilteredPersonList().get(1), orderMap);
+
+        assertEquals(
+                String.format(OrderCommand.MESSAGE_SUCCESS, Messages.format(expectedOrder)),
+                commandResult.getFeedbackToUser()
+        );
+
+        assertEquals(Arrays.asList(expectedOrder), modelStub.ordersAdded);
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/commands/OrderCommandTest.java
     }
 
     @Test
     public void equals() {
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/person/AddPersonCommandTest.java
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
         AddPersonCommand addAliceCommand = new AddPersonCommand(alice);
         AddPersonCommand addBobCommand = new AddPersonCommand(bob);
+========
+        Map<Integer, Integer> order1 = new HashMap<>();
+        order1.put(1, 2);
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/commands/OrderCommandTest.java
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        Map<Integer, Integer> order2 = new HashMap<>();
+        order2.put(2, 3);
 
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/person/AddPersonCommandTest.java
         // same values -> returns true
         AddPersonCommand addAliceCommandCopy = new AddPersonCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+========
+        OrderCommand command1 = new OrderCommand(1, order1);
+        OrderCommand command2 = new OrderCommand(2, order2);
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/commands/OrderCommandTest.java
 
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        // same object
+        assertTrue(command1.equals(command1));
 
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        // same values
+        OrderCommand command1Copy = new OrderCommand(1, order1);
+        assertTrue(command1.equals(command1Copy));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different types
+        assertFalse(command1.equals(1));
+
+        // null
+        assertFalse(command1.equals(null));
+
+        // different index
+        assertFalse(command1.equals(command2));
     }
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/person/AddPersonCommandTest.java
 
     @Test
     public void toStringMethod() {
@@ -96,6 +134,8 @@ public class AddCommandTest {
         assertTrue(addCommand.mutatesModel());
     }
 
+========
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/commands/OrderCommandTest.java
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -226,45 +266,16 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that always accepts orders.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
+    private class ModelStubAcceptingOrderAdded extends ModelStub {
+        final ArrayList<Order> ordersAdded = new ArrayList<>();
+        private final Person defaultPerson = new PersonBuilder().build();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public void addOrder(Order order) {
+            requireNonNull(order);
+            ordersAdded.add(order);
         }
     }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }

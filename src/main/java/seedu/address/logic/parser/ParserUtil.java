@@ -3,7 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,7 +14,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.ProductQuantityPair;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Region;
@@ -120,24 +122,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        if (email.isBlank()) {
-            return null;
-        }
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
-    }
-
-
-    /**
      * Parses a {@code String region} into a {@code Region}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -152,16 +136,31 @@ public class ParserUtil {
         return new Region(trimmedRegion);
     }
 
+    public static Map<Integer, Integer> parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        Map<Integer, Integer> orderMap = new HashMap<>();
+        String trimmedOrder = order.trim();
+        int menuItem = Integer.parseInt(trimmedOrder.split(" ")[0]);
+        int quantity = Integer.parseInt(trimmedOrder.split(" ")[1]);
+        orderMap.put(menuItem, quantity);
+        return orderMap;
+    }
     /**
      * Parses a {@code String order} into a {@code String order}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code order} is invalid.
      */
-    public static String parseOrder(String order) throws ParseException {
-        requireNonNull(order);
-        String trimmedOrder = order.trim();
-        return trimmedOrder;
+    public static Map<Integer, Integer> parseOrders(List<String> orders) throws ParseException {
+        requireNonNull(orders);
+        Map<Integer, Integer> orderMap = new HashMap<>();
+        for (String order : orders) {
+            String trimmedOrder = order.trim();
+            int menuItem = Integer.parseInt(trimmedOrder.split(" ")[0]);
+            int quantity = Integer.parseInt(trimmedOrder.split(" ")[1]);
+            orderMap.put(menuItem, quantity);
+        }
+        return orderMap;
     }
 
     /**

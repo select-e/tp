@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_ORDER = "Orders list contains duplicate order(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedOrder> orders = new ArrayList<>();
@@ -73,7 +74,10 @@ class JsonSerializableAddressBook {
                     .findFirst()
                     .orElseThrow(() -> new IllegalValueException("Person not found for order"));
 
-            Order order = jsonOrder.toModelType(person);
+            OrderMap order = jsonOrder.toModelType(person);
+            if (addressBook.hasOrder(order)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ORDER);
+            }
             addressBook.addOrder(order);
         }
         return addressBook;

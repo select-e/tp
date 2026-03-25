@@ -13,11 +13,16 @@ import seedu.address.model.person.RegionContainsKeywordsPredicate;
 
 public class FindPersonCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindPersonCommandParser parser = new FindPersonCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+<<<<<<< HEAD
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+=======
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+>>>>>>> add-orders
     }
 
     @Test

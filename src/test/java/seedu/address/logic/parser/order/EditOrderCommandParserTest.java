@@ -1,12 +1,10 @@
-package seedu.address.logic.parser.order;
+<<<<<<< HEAD
+package seedu.address.logic.parser.person;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -36,21 +34,28 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.person.EditPersonCommand;
 import seedu.address.logic.commands.person.EditPersonCommand.EditPersonDescriptor;
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/order/EditOrderCommandParserTest.java
 import seedu.address.logic.parser.person.EditCommandParser;
+========
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/parser/person/EditPersonCommandParserTest.java
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/order/EditOrderCommandParserTest.java
 public class EditOrderCommandParserTest {
+========
+public class EditPersonCommandParserTest {
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/parser/person/EditPersonCommandParserTest.java
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE);
 
-    private seedu.address.logic.parser.person.EditCommandParser parser = new EditCommandParser();
+    private EditPersonCommandParser parser = new EditPersonCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -87,7 +92,7 @@ public class EditOrderCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
@@ -96,7 +101,7 @@ public class EditOrderCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -144,6 +149,15 @@ public class EditOrderCommandParserTest {
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPostalCode(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditPersonCommand(targetIndex, descriptor);
+<<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/order/EditOrderCommandParserTest.java
+========
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // order
+        userInput = targetIndex.getOneBased() + ORDER_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withOrders(VALID_ORDER_AMY).build();
+        expectedCommand = new EditPersonCommand(targetIndex, descriptor);
+>>>>>>>> add-orders:src/test/java/seedu/address/logic/parser/person/EditPersonCommandParserTest.java
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
@@ -156,7 +170,7 @@ public class EditOrderCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+        // AddPersonCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_PERSON;
@@ -194,5 +208,20 @@ public class EditOrderCommandParserTest {
         EditPersonCommand expectedCommand = new EditPersonCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+=======
+package seedu.address.logic.parser.order;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.order.EditOrderCommand;
+
+public class EditOrderCommandParserTest {
+
+    @Test
+    public void parse_returnsCommandInstance() throws Exception {
+        assertTrue(new EditOrderCommandParser().parse("1") instanceof EditOrderCommand);
+>>>>>>> add-orders
     }
 }
