@@ -200,6 +200,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**FindPerson** | `findperson KEYWORD [MORE_KEYWORDS]`<br> e.g., `find N NE`
+**FindPerson** | `findperson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findperson N NE`
 **ListOrder** | `listorder`
 **Help** | `help`
