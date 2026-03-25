@@ -5,8 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.order.EditCommand;
-import seedu.address.logic.commands.order.EditCommand.EditOrderDescriptor;
+import seedu.address.logic.commands.order.EditOrderCommand;
+import seedu.address.logic.commands.order.EditOrderCommand.EditOrderDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -17,14 +17,14 @@ import seedu.address.model.order.ProductQuantityPair;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditCommandParser implements Parser<EditOrderCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditOrderCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ORDERS);
@@ -34,7 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditOrderCommand.MESSAGE_USAGE), pe);
         }
 
         EditOrderDescriptor editOrderDescriptor = new EditOrderDescriptor();
@@ -45,9 +45,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editOrderDescriptor.setProduct(productQuantityPair.getProduct());
             editOrderDescriptor.setQuantity(productQuantityPair.getQuantity().map(q -> q.value).orElse(0));
         } else {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditOrderCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editOrderDescriptor);
+        return new EditOrderCommand(index, editOrderDescriptor);
     }
 }

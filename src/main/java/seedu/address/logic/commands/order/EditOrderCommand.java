@@ -23,7 +23,7 @@ import seedu.address.model.order.Quantity;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "editorder";
 
@@ -46,7 +46,7 @@ public class EditCommand extends Command {
      * @param index of the order in the filtered person list to edit
      * @param editOrderDescriptor details to edit the order with
      */
-    public EditCommand(Index index, EditOrderDescriptor editOrderDescriptor) {
+    public EditOrderCommand(Index index, EditOrderDescriptor editOrderDescriptor) {
         requireNonNull(index);
         requireNonNull(editOrderDescriptor);
 
@@ -110,11 +110,11 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditOrderCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
+        EditOrderCommand otherEditCommand = (EditOrderCommand) other;
         return index.equals(otherEditCommand.index)
                 && editOrderDescriptor.equals(otherEditCommand.editOrderDescriptor);
     }
