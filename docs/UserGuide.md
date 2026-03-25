@@ -116,9 +116,9 @@ Shows a list of all orders in the order list.
 
 Format: `listorder`
 
-### Locating contacts by region: `findperson`
+### Locating people by region: `findperson`
 
-Finds contacts whose regions match any of the given keywords.
+Finds people whose regions match any of the given keywords.
 
 Format: `findperson KEYWORD [MORE_KEYWORDS]`
 
