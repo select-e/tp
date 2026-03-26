@@ -9,7 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderMap;
 
 /**
  * Lists all orders in the address book to the user.
@@ -30,12 +30,12 @@ public class ListOrderCommand extends Command {
 
         model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
 
-        ObservableList<Order> orderList = model.getAddressBook().getOrderList();
+        ObservableList<OrderMap> orderList = model.getAddressBook().getOrderList();
         if (orderList.isEmpty()) {
-            return new CommandResult(MESSAGE_NO_ORDERS);
+            return new CommandResult(MESSAGE_NO_ORDERS, false, false, false, true);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
     }
 
     @Override

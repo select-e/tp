@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -57,7 +58,8 @@ public class FindPersonCommandTest {
         RegionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model,
+                new CommandResult(expectedMessage, false, false, true, false), expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -68,7 +70,8 @@ public class FindPersonCommandTest {
         RegionContainsKeywordsPredicate predicate = preparePredicate("N");
         FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model,
+                new CommandResult(expectedMessage, false, false, true, false), expectedModel);
         assertEquals(model.getFilteredPersonList().size(), 7);
     }
 
@@ -78,7 +81,8 @@ public class FindPersonCommandTest {
         RegionContainsKeywordsPredicate predicate = preparePredicate("W");
         FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model,
+                new CommandResult(expectedMessage, false, false, true, false), expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 

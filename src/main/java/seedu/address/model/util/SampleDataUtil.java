@@ -1,11 +1,14 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -42,10 +45,40 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
+        Person[] samplePersons = getSamplePersons();
+
+        for (Person samplePerson : samplePersons) {
             sampleAb.addPerson(samplePerson);
         }
+
+        for (OrderMap sampleOrder : getSampleOrders(samplePersons)) {
+            sampleAb.addOrder(sampleOrder);
+        }
+
         return sampleAb;
+    }
+
+    /**
+     * Returns sample orders tagged to sample persons.
+     */
+    public static OrderMap[] getSampleOrders(Person[] persons) {
+        return new OrderMap[] {
+            new OrderMap(persons[0], getOrderMap(1, 2, 7, 1)),
+            new OrderMap(persons[1], getOrderMap(2, 1, 8, 1)),
+            new OrderMap(persons[2], getOrderMap(3, 1)),
+            new OrderMap(persons[4], getOrderMap(4, 2, 5, 1))
+        };
+    }
+
+    /**
+     * Returns an order map from menu item and quantity pairs.
+     */
+    private static Map<Integer, Integer> getOrderMap(int... pairs) {
+        Map<Integer, Integer> orderMap = new HashMap<>();
+        for (int i = 0; i < pairs.length - 1; i += 2) {
+            orderMap.put(pairs[i], pairs[i + 1]);
+        }
+        return orderMap;
     }
 
     /**

@@ -28,9 +28,9 @@ public class ListCommand extends Command {
 
         ObservableList<Person> personList = model.getAddressBook().getPersonList();
         if (personList.isEmpty()) {
-            return new CommandResult(MESSAGE_NO_CONTACTS);
+            return new CommandResult(MESSAGE_NO_CONTACTS, false, false, true, false);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
 }

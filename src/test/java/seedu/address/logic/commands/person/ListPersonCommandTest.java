@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,18 +29,21 @@ public class ListPersonCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListPersonCommand(), model, ListPersonCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListPersonCommand(), model,
+                new CommandResult(ListPersonCommand.MESSAGE_SUCCESS, false, false, true, false), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListPersonCommand(), model, ListPersonCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListPersonCommand(), model,
+                new CommandResult(ListPersonCommand.MESSAGE_SUCCESS, false, false, true, false), expectedModel);
     }
 
     @Test
     public void execute_listIsEmpty_showsNothing() {
         Model emptyModel = new ModelManager();
-        assertCommandSuccess(new ListPersonCommand(), emptyModel, ListPersonCommand.MESSAGE_NO_CONTACTS, emptyModel);
+        assertCommandSuccess(new ListPersonCommand(), emptyModel,
+                new CommandResult(ListPersonCommand.MESSAGE_NO_CONTACTS, false, false, true, false), emptyModel);
     }
 }

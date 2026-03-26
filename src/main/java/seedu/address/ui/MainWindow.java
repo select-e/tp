@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private OrderListPanel orderListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +44,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private VBox personList;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private VBox orderList;
+
+    @FXML
+    private StackPane orderListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +124,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        orderListPanel = new OrderListPanel(logic.getFilteredOrderList());
+        orderListPanelPlaceholder.getChildren().add(orderListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +135,23 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        // Default to showing persons
+        showPersonList();
+    }
+
+    private void showPersonList() {
+        personList.setVisible(true);
+        personList.setManaged(true);
+        orderList.setVisible(false);
+        orderList.setManaged(false);
+    }
+
+    private void showOrderList() {
+        personList.setVisible(false);
+        personList.setManaged(false);
+        orderList.setVisible(true);
+        orderList.setManaged(true);
     }
 
     /**
@@ -184,6 +215,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPersons()) {
+                showPersonList();
+            } else if (commandResult.isShowOrders()) {
+                showOrderList();
             }
 
             return commandResult;
