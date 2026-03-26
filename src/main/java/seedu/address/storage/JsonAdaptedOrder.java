@@ -41,7 +41,8 @@ public class JsonAdaptedOrder {
         for (String order : orders) {
             String[] parts = order.split(" ");
             this.orders.put(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
-        }    }
+        }
+    }
 
     /**
      * Converts a given {@code Order} into this class for Jackson use.
