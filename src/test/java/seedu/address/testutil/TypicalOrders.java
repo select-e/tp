@@ -13,19 +13,19 @@ import seedu.address.model.order.OrderMap;
 public class TypicalOrders {
 
     public static final OrderMap ALICE_ORDER = new OrderBuilder().withPerson(TypicalPersons.ALICE)
-            .withOrderMap("1 2", "2 4").build();
+            .withOrderId(1).withOrderMap("1 2", "2 4").build();
     public static final OrderMap BENSON_ORDER = new OrderBuilder().withPerson(TypicalPersons.BENSON)
-            .withOrderMap("2 1", "3 6", "1 1").build();
+            .withOrderId(2).withOrderMap("2 1", "3 6", "1 1").build();
     public static final OrderMap CARL_ORDER = new OrderBuilder().withPerson(TypicalPersons.CARL)
-            .withOrderMap("1 1").build();
+            .withOrderId(3).withOrderMap("1 1").build();
     public static final OrderMap DANIEL_ORDER = new OrderBuilder().withPerson(TypicalPersons.DANIEL)
-            .withOrderMap("4 1").build();
+            .withOrderId(4).withOrderMap("4 1").build();
     public static final OrderMap ELLE_ORDER = new OrderBuilder().withPerson(TypicalPersons.ELLE)
-            .withOrderMap("4 4").build();
+            .withOrderId(5).withOrderMap("4 4").build();
     public static final OrderMap FIONA_ORDER = new OrderBuilder().withPerson(TypicalPersons.FIONA)
-            .withOrderMap("5 1").build();
+            .withOrderId(6).withOrderMap("5 1").build();
     public static final OrderMap GEORGE_ORDER = new OrderBuilder().withPerson(TypicalPersons.GEORGE)
-            .withOrderMap("2 2", "4 2").build();
+            .withOrderId(7).withOrderMap("2 2", "4 2").build();
 
     // Manually added
     public static final OrderMap HOON_ORDER = new OrderBuilder().withPerson(TypicalPersons.HOON)

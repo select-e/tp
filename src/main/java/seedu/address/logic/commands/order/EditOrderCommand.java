@@ -148,7 +148,7 @@ public class EditOrderCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editOrderDescriptor)
+                .add("editOrderDescriptor", editOrderDescriptor)
                 .toString();
     }
 

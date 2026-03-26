@@ -102,12 +102,12 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The orderId of {@code editedOrder} must not be the same as another existing order in the address book.
      */
-    void setOrder(OrderMap target, OrderMap editedPerson);
+    void setOrder(OrderMap target, OrderMap editedOrder);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered order list */
     ObservableList<OrderMap> getFilteredOrderList();
 
     /**
