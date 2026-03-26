@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.order.OrderMap;
-import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Order} objects to be used in tests.
@@ -61,6 +60,7 @@ public class TypicalOrders {
     }
 
     public static List<OrderMap> getTypicalOrders() {
-        return new ArrayList<>(Arrays.asList(ALICE_ORDER, BENSON_ORDER, CARL_ORDER, DANIEL_ORDER, ELLE_ORDER, FIONA_ORDER, GEORGE_ORDER));
+        return new ArrayList<>(Arrays.asList(
+                ALICE_ORDER, BENSON_ORDER, CARL_ORDER, DANIEL_ORDER, ELLE_ORDER, FIONA_ORDER, GEORGE_ORDER));
     }
 }

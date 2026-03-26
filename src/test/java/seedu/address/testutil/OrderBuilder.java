@@ -4,14 +4,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Region;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Order objects.
@@ -26,14 +24,14 @@ public class OrderBuilder {
     public static final int DEFAULT_PRODUCT = 1;
     public static final int DEFAULT_QUANTITY = 2;
 
-    Person DEFAULT_PERSON = new Person(
+    private static final Person DEFAULT_PERSON = new Person(
             new Name(DEFAULT_NAME),
             new Phone(DEFAULT_PHONE),
             new Address(DEFAULT_ADDRESS, DEFAULT_UNITNO),
             new Region(DEFAULT_REGION),
             new HashSet<>());
 
-    Map<Integer, Integer> DEFAULT_ORDERMAP = new HashMap<>(DEFAULT_PRODUCT, DEFAULT_QUANTITY);
+    private static final Map<Integer, Integer> DEFAULT_ORDERMAP = new HashMap<>(DEFAULT_PRODUCT, DEFAULT_QUANTITY);
 
     private Person person;
     private Map<Integer, Integer> orders;
@@ -46,11 +44,17 @@ public class OrderBuilder {
         orders = DEFAULT_ORDERMAP;
     }
 
+    /**
+     * Initializes the OrderBuilder with the data of {@code orderToCopy}.
+     */
     public OrderBuilder(OrderMap orderToCopy) {
         person = orderToCopy.getPerson();
         orders = new HashMap<>(orderToCopy.getOrderMap());
     }
 
+    /**
+     * Sets the {@code person} of the {@code OrderMap} we are building.
+     */
     public OrderBuilder withPerson(Person person) {
         this.person = person;
         return this;
