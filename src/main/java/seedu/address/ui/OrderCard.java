@@ -49,7 +49,7 @@ public class OrderCard extends UiPart<Region> {
             int quantity = entry.getValue();
             String itemLabel;
             try {
-                Product product = Messages.menu.getItem(menuItem);
+                Product product = Messages.MENU.getItem(menuItem);
                 itemLabel = product.getName() + " x" + quantity;
             } catch (IndexOutOfBoundsException e) {
                 itemLabel = "Item " + menuItem + " x" + quantity;
@@ -58,4 +58,3 @@ public class OrderCard extends UiPart<Region> {
         }
     }
 }
-

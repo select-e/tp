@@ -73,19 +73,19 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person: `addperson`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addperson n/NAME p/PHONE_NUMBER a/POSTAL_CODE [u/UNIT_NUMBER] r/REGION [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addperson n/John Doe p/98765432 a/111111 u/#01-01 r/N`
+* `addperson n/Betsy Crowe p/87243155 a/110022 r/C t/loyal customer`
 
 ### Listing all persons : `listperson`
 
@@ -179,6 +179,20 @@ Examples:
 *  `editorder 1 o/1 1 o/2 4` Edits the 1st order in the list to include 1 of menu item 1 and 4 of menu item 2.
 *  `editorder 2 o/2 0` Edits the 2nd order to clear the selection of menu item 2.
 
+### Adding an order: `addorder`
+
+Adds an order to the address book.
+
+Format: `addorder c/CUSTOMER_INDEX o/MENU_ITEM QUANTITY_ORDERED…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of orders (excluding 0)
+</div>
+
+Examples:
+* `addorder c/1 o/2 5`
+* `addorder c/2 o/1 1 o/2 3 o/4 2`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -216,11 +230,11 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### Saving customer and order data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Updating the customer and order data file  
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -228,10 +242,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -38,6 +38,7 @@ public class UniqueOrderListTest {
 
     @BeforeEach
     void setUp() {
+        OrderMap.cleanIdx();
         uniqueOrderList = new UniqueOrderList();
         Person person1 = new PersonBuilder().build();
         Person person2 = new PersonBuilder().build();
@@ -70,7 +71,7 @@ public class UniqueOrderListTest {
     @Test
     void add_duplicateOrder_throwsDuplicatePersonException() {
         uniqueOrderList.add(order1);
-        OrderMap duplicate = order1;
+        OrderMap duplicate = new OrderBuilder(order1).build();
         assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.add(duplicate));
     }
 

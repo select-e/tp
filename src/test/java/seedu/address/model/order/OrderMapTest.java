@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +14,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class OrderTest {
+public class OrderMapTest {
 
     private final Person person = new PersonBuilder().build();
     private final Map<Integer, Integer> ordermap = new HashMap<>();
 
-    public OrderTest() {
+    public OrderMapTest() {
         ordermap.put(1, 2);
     }
 
@@ -53,6 +54,11 @@ public class OrderTest {
         OrderMap order = new OrderMap(person, ordermap);
         assertEquals(order, order);
         assertEquals(order.hashCode(), order.hashCode());
+        LocalDateTime now = LocalDateTime.now();
+        OrderMap order1 = new OrderMap(1, person, ordermap, OrderStatus.PENDING, new OrderDateTime(now));
+        OrderMap order2 = new OrderMap(1, person, ordermap, OrderStatus.PENDING, new OrderDateTime(now));
+        assertEquals(order1, order2);
+        assertEquals(order1.hashCode(), order2.hashCode());
     }
 
     @Test
@@ -67,8 +73,8 @@ public class OrderTest {
     @Test
     void equals_otherObject_returnsFalse() {
         OrderMap order = new OrderMap(person, ordermap);
-        assertNotEquals(order, null);
-        assertNotEquals(order, "not an order");
+        assertNotEquals(null, order);
+        assertNotEquals("not an order", order);
     }
 
     @Test

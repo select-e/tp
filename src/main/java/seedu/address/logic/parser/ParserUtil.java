@@ -12,6 +12,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.ProductQuantityPair;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -152,11 +154,16 @@ public class ParserUtil {
      * Parses a List of {@code String order} into a {@code Map<Integer, Integer> orderMap}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Map<Integer, Integer> parseOrders(List<String> orders) {
+    public static Map<Integer, Integer> parseOrders(List<String> orders) throws ParseException {
         requireNonNull(orders);
         Map<Integer, Integer> orderMap = new HashMap<>();
         for (String order : orders) {
             String trimmedOrder = order.trim();
+
+            if (!OrderMap.isValidProductQuantityPair(trimmedOrder)) {
+                throw new ParseException(ProductQuantityPair.MESSAGE_CONSTRAINTS);
+            }
+
             int menuItem = Integer.parseInt(trimmedOrder.split(" ")[0]);
             int quantity = Integer.parseInt(trimmedOrder.split(" ")[1]);
             orderMap.put(menuItem, quantity);

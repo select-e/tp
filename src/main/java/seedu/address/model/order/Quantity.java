@@ -1,50 +1,49 @@
 package seedu.address.model.order;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
 
 /**
- * Represents the Quantity of the Product ordered.
- * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
+ * Represents a quantity in an order.
  */
 public class Quantity {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Quantity must be a positive integer.";
+    public static final String MESSAGE_CONSTRAINTS = "Quantity should be a positive integer.";
+    private static final String VALIDATION_REGEX = "^[1-9]\\d*$";
 
-    public final int value;
+    private final int value;
 
     /**
-     * Constructs an {@code Quantity}.
+     * Constructs a {@code Quantity}.
      *
-     * @param quantity A valid Quantity.
+     * @param quantity A valid quantity string.
      */
     public Quantity(String quantity) {
         requireNonNull(quantity);
-        checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
-        value = Integer.parseInt(quantity);
+        AppUtil.checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
+        this.value = Integer.parseInt(quantity);
+    }
+
+    public int getValue() {
+        return value;
     }
 
     /**
      * Returns true if a given string is a valid quantity.
      */
     public static boolean isValidQuantity(String test) {
-        try {
-            return Integer.parseInt(test) > 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return test != null && test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return Integer.toString(value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof Quantity
-                && value == ((Quantity) other).value);
+                || (other instanceof Quantity && value == ((Quantity) other).value);
     }
 
     @Override
@@ -52,3 +51,4 @@ public class Quantity {
         return Integer.hashCode(value);
     }
 }
+

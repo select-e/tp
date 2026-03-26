@@ -3,6 +3,7 @@ package seedu.address.logic.commands.order;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.order.OrderDateTime;
 import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.OrderStatus;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddOrderCommand}.
@@ -39,6 +43,9 @@ public class AddOrderCommandIntegrationTest {
 
         AddOrderCommand addOrderCommand = new AddOrderCommand(index, order);
         CommandResult result = addOrderCommand.execute(model);
+        Person person = model.getFilteredPersonList().get(index - 1);
+        OrderMap orderToAdd = new OrderMap(
+                OrderMap.getNextId(), person, order, OrderStatus.PENDING, new OrderDateTime(LocalDateTime.now()));
 
         OrderMap addedOrder = model.getAddressBook().getOrderList().get(0);
         assertEquals(String.format(AddOrderCommand.MESSAGE_SUCCESS, Messages.format(addedOrder)),

@@ -208,6 +208,12 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
+        boolean one = this.versionedAddressBook.equals(otherModelManager.versionedAddressBook);
+        boolean two = userPrefs.equals(otherModelManager.userPrefs);
+        boolean three = filteredPersons.equals(otherModelManager.filteredPersons);
+        boolean four = filteredOrders.equals(otherModelManager.filteredOrders);
+
         return this.versionedAddressBook.equals(otherModelManager.versionedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)

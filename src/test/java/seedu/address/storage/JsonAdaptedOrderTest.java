@@ -2,15 +2,17 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.order.OrderDateTime;
 import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.OrderStatus;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -32,9 +34,14 @@ public class JsonAdaptedOrderTest {
         );
         ab.addPerson(person);
 
+        HashMap<Integer, Integer> items = new HashMap<>();
+        items.put(1, 1);
         OrderMap order = new OrderMap(
+                1,
                 person,
-                new HashMap<>(Map.of(1, 1))
+                items,
+                OrderStatus.PENDING,
+                new OrderDateTime(LocalDateTime.parse("2026-03-10T10:15:30"))
         );
         ab.addOrder(order);
 

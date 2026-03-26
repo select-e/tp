@@ -33,4 +33,11 @@ public class ProductList {
     public Product getItem(int index) {
         return menu.get(index - 1);
     }
+
+    /**
+     * Returns true if the index corresponds to a valid item on the menu.
+     */
+    public boolean isValidItem(int index) {
+        return index > 0 && index < menu.size();
+    }
 }

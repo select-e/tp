@@ -2,7 +2,7 @@ package seedu.address.logic.commands.order;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -41,7 +41,7 @@ public class AddOrderCommandTest {
     }
 
     @Test
-    public void execute_orderAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_orderAcceptedByModel_addSuccessful() {
         ModelStubAcceptingOrderAdded modelStub = new ModelStubAcceptingOrderAdded();
 
         Map<Integer, Integer> order = new HashMap<>();
@@ -68,20 +68,20 @@ public class AddOrderCommandTest {
         AddOrderCommand addOrderCommand2 = new AddOrderCommand(2, order2);
 
         // same object -> returns true
-        assertTrue(addOrderCommand1.equals(addOrderCommand1));
+        assertEquals(addOrderCommand1, addOrderCommand1);
 
         // same values -> returns true
         AddOrderCommand addOrderCommandCopy = new AddOrderCommand(1, order1);
-        assertTrue(addOrderCommand1.equals(addOrderCommandCopy));
+        assertEquals(addOrderCommand1, addOrderCommandCopy);
 
         // different types -> returns false
-        assertFalse(addOrderCommand1.equals(1));
+        assertNotEquals(addOrderCommand1, 1);
 
         // null -> returns false
-        assertFalse(addOrderCommand1.equals(null));
+        assertNotEquals(addOrderCommand1, null);
 
         // different order -> returns false
-        assertFalse(addOrderCommand1.equals(addOrderCommand2));
+        assertNotEquals(addOrderCommand1, addOrderCommand2);
     }
 
     @Test
@@ -97,7 +97,7 @@ public class AddOrderCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError();

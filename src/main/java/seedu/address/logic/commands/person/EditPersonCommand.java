@@ -279,7 +279,6 @@ public class EditPersonCommand extends Command {
                     .add("postalCode", postalCode)
                     .add("unitNo", unitNo)
                     .add("region", region)
-                    .add("orders", order)
                     .add("tags", tags)
                     .toString();
         }
