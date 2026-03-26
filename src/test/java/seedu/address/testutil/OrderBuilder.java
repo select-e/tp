@@ -27,14 +27,14 @@ public class OrderBuilder {
     public static final int DEFAULT_PRODUCT = 1;
     public static final int DEFAULT_QUANTITY = 2;
 
-    private final Person DefaultPerson = new Person(
+    private final Person defaultPerson = new Person(
             new Name(DEFAULT_NAME),
             new Phone(DEFAULT_PHONE),
             new Address(DEFAULT_ADDRESS, DEFAULT_UNITNO),
             new Region(DEFAULT_REGION),
             new HashSet<>());
 
-    private Map<Integer, Integer> DefaultOrderMap = new HashMap<>(DEFAULT_PRODUCT, DEFAULT_QUANTITY);
+    private final Map<Integer, Integer> defaultOrderMap = new HashMap<>();
 
     private Person person;
     private Map<Integer, Integer> orders;
@@ -43,6 +43,7 @@ public class OrderBuilder {
      * Creates a {@code OrderBuilder} with the default details.
      */
     public OrderBuilder() {
+        defaultOrderMap.put(DEFAULT_PRODUCT, DEFAULT_QUANTITY);
         person = getDefaultPerson();
         orders = getDefaultOrderMap();
     }
@@ -86,13 +87,13 @@ public class OrderBuilder {
 
     /** Gets DEFAULT_PERSON. */
     public Person getDefaultPerson() {
-        return DefaultPerson;
+        return defaultPerson;
     }
 
 
     /** Gets DEFAULT_ORDERMAP. */
     public Map<Integer, Integer> getDefaultOrderMap() {
-        return DefaultOrderMap;
+        return defaultOrderMap;
     }
 
     public OrderMap build() {

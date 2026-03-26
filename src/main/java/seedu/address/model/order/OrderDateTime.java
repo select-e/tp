@@ -3,7 +3,6 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an OrderDate of an Order.
@@ -24,8 +23,7 @@ public class OrderDateTime {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return value.format(formatter);
+        return value.toString();
     }
 
     @Override

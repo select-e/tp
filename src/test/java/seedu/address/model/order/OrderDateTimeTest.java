@@ -34,7 +34,7 @@ public class OrderDateTimeTest {
     @Test
     void equals_differentValue_returnsFalse() {
         OrderDateTime a = new OrderDateTime(LocalDateTime.of(2026, 3, 11, 23, 59));
-        OrderDateTime b = new OrderDateTime(LocalDateTime.of(2026, 3, 11, 23, 59));
+        OrderDateTime b = new OrderDateTime(LocalDateTime.of(2026, 3, 11, 23, 58));
         assertNotEquals(a, b);
     }
 }

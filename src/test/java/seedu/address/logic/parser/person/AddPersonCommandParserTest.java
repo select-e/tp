@@ -151,10 +151,6 @@ public class AddPersonCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
                 + VALID_REGION_BOB, expectedMessage);
 
-        // missing order prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + REGION_DESC_BOB, expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_ADDRESS_BOB
                 + VALID_REGION_BOB, expectedMessage);

@@ -10,6 +10,6 @@ public class AddOrderCommandParserTest {
 
     @Test
     public void parse_returnsCommandInstance() throws Exception {
-        assertTrue(new AddOrderCommandParser().parse("anything") instanceof AddOrderCommand);
+        assertTrue(new AddOrderCommandParser().parse(" c/1 o/1 1") instanceof AddOrderCommand);
     }
 }

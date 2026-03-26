@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,16 +30,17 @@ public class JsonAdaptedOrder {
             @JsonProperty("personName") String personName,
             @JsonProperty("status") String status,
             @JsonProperty("orderDatetime") String orderDatetime,
-            @JsonProperty("orders") List<String> orders) {
+            @JsonProperty("orders") Map<String, Integer> orders) {
 
         this.orderId = orderId;
         this.personName = personName;
         this.status = status;
         this.orderDatetime = orderDatetime;
         this.orders = new HashMap<>();
-        for (String order : orders) {
-            String[] parts = order.split(" ");
-            this.orders.put(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+        if (orders != null) {
+            for (Map.Entry<String, Integer> entry : orders.entrySet()) {
+                this.orders.put(Integer.parseInt(entry.getKey()), entry.getValue());
+            }
         }
     }
 
@@ -51,7 +51,7 @@ public class JsonAdaptedOrder {
         this.orderId = Integer.toString(source.getOrderId());
         this.personName = source.getPerson().getName().toString();
         this.status = source.getStatus().toString();
-        this.orders = source.getOrderMap();
+        this.orders = new HashMap<>(source.getOrderMap());
         this.orderDatetime = source.getOrderDatetime().toString();
     }
 

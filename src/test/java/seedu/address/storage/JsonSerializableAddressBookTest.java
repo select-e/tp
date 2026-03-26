@@ -66,10 +66,10 @@ public class JsonSerializableAddressBookTest {
         );
         ab.addPerson(person);
 
-        OrderMap order = new OrderMap(
-                person,
-                (Map<Integer, Integer>) new HashMap<>().put(1, 1)
-        );
+        Map<Integer, Integer> orderItems = new HashMap<>();
+        orderItems.put(1, 1);
+
+        OrderMap order = new OrderMap(person, orderItems);
         ab.addOrder(order);
 
         JsonSerializableAddressBook jsonAb = new JsonSerializableAddressBook(ab);
@@ -82,8 +82,7 @@ public class JsonSerializableAddressBookTest {
         assertEquals("W", converted.getPersonList().get(0).getRegion().toString());
 
         assertEquals("Alice", converted.getOrderList().get(0).getPerson().getName().toString());
-        assertEquals((Map<Integer, Integer>) new HashMap<>().put(1, 1),
-                converted.getOrderList().get(0).getOrderMap());
+        assertEquals(orderItems, converted.getOrderList().get(0).getOrderMap());
     }
 
 }

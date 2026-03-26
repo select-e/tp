@@ -34,6 +34,13 @@ public class OrderMap {
     }
 
     /**
+     * Resets the static index. Made for test environments.
+     */
+    public static void cleanIdx() {
+        idx = 1;
+    }
+
+    /**
      * Returns the {@link Person} associated with this order.
      */
     public Person getPerson() {
