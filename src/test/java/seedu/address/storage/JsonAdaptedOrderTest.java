@@ -2,8 +2,6 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,12 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.order.OrderMap;
-import seedu.address.model.order.OrderDateTime;
-import seedu.address.model.order.OrderId;
-import seedu.address.model.order.OrderStatus;
-import seedu.address.model.order.Price;
-import seedu.address.model.order.Product;
-import seedu.address.model.order.Quantity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
