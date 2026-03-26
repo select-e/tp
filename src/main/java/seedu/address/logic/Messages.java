@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -62,10 +63,10 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append("Order ID: ")
                 .append(orderMap.getOrderId())
-                .append("Customer: ")
-                .append(Messages.format(orderMap.getPerson()))
+                .append("; Customer: ")
+                .append(orderMap.getPerson().getName())
                 .append("; Date/Time: ")
-                .append(orderMap.getOrderDatetime())
+                .append(orderMap.getOrderDatetime().toString())
                 .append("; Status: ")
                 .append(orderMap.getStatus())
                 .append("; Order Map: ");
@@ -73,7 +74,7 @@ public class Messages {
             Product product = menu.getItem(entry.getKey());
             int quantity = entry.getValue();
             builder.append(String.format(
-                    "%s [%d] [$%.2f]",
+                    "%s [%d] [$%.2f] ",
                     product.getName(),
                     quantity,
                     product.getPrice()
