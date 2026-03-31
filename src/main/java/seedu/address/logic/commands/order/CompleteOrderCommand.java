@@ -43,7 +43,7 @@ public class CompleteOrderCommand extends Command {
         return true;
     }
 
-    /** Indicates that AddOrderCommand should be recorded. */
+    /** Indicates that CompleteOrderCommand should be recorded. */
     @Override
     public boolean shouldRecordInHistory() {
         return true;
