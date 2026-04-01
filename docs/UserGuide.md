@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Food Bridge is a **desktop app for restaurant delivery workers to manage contacts and orders. It is optimized for use via a Command Line Interface** (CLI).
+Food Bridge is a desktop app that helps restaurant delivery workers keep track of customer details and orders quickly and efficiently.
+By using simple typed commands, you can manage everything faster than traditional point-and-click apps.
 
 * Table of Contents
 {:toc}
@@ -12,33 +13,69 @@ Food Bridge is a **desktop app for restaurant delivery workers to manage contact
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
-   **Windows/Linux users:** Ensure you have the precise Java and JDK versions prescribed by running the commands `java -version` and `javac -version` in your command terminal respectively. 
+1. Ensure you have Java `17` or above installed on your computer. Use these installation guides to ensure you have the correct version:
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-T12-4/tp/releases).
+   * [Windows installation guide](https://se-education.org/guides/tutorials/javaInstallationWindows.html)
+   * [Mac installation guide](https://se-education.org/guides/tutorials/javaInstallationMac.html)
+   * [Linux installation guide](https://se-education.org/guides/tutorials/javaInstallationLinux.html)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Food Bridge Application.
+2. Download the latest version of the app from [here](https://github.com/AY2526S2-CS2103T-T12-4/tp/releases) (under Assets, look for the file ending with `.jar`). 
 
-1. Open a command terminal. 
-2. Use the command `cd FOLDER_PATH`, where `FOLDER_PATH` is the folder you put the jar file in. Then, use the command `java -jar food-bridge-[version].jar` to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. In your computer's file manager (e.g. File Explorer or Finder), create a new folder and copy the downloaded `.jar` file into it.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+4. Open a command terminal.
 
-   * `listperson` : Lists all contacts.
+   * **Windows users**: Press Win + R, type "cmd", and press Enter.
+   * **Mac users**: Press Command + Space to open Spotlight search, type "Terminal", and press Enter.
 
-   * `addperson n/John Doe p/98765432 a/111111 u/#01-01 r/N` : Adds a contact named `John Doe` to the Address Book.
+5. Type <code>cd </code> (make sure to include the space), then drag the folder containing the `.jar` file into the terminal window. Press Enter to navigate to the folder.
 
-   * `deleteperson 3` : Deletes the 3rd contact shown in the current list.
+6. Type `java -jar food-bridge-[version].jar` and press Enter to launch the application.<br>
+    E.g. If you downloaded version 1.4, you should type `java -jar food-bridge-1.4.jar`.<br>
+     A GUI similar to the below should appear. Note how the app contains some sample data.<br>
+         ![Ui](images/Ui.png)
 
-   * `clear` : Deletes all contacts.
+7. Type a command into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+    
+8. Refer to the [Example Workflow](#example-workflow) for a quick introduction to the commands.
 
-   * `exit` : Exits the app.
+9. Refer to the [Features](#features) below for details of each command.
 
-1. Refer to the [Features](#features) below for details of each command.
+--------------------------------------------------------------------------------------------------------------------
+
+## Example Workflow
+
+Here is an example workflow for a new user getting to know Food Bridge.
+
+1. [**Clear existing data**](#clearing-all-entries--clear): Use `clear` to remove the sample data.
+
+2. [**Add a customer**](#adding-a-customer-addperson): A new order come from a customer:
+   * Name: Jenny Tan
+   * Phone number: 98765432.
+   * Postal code: 111111
+   * Unit number: #01-01
+   * Region: North.<br>
+   Use `addperson n/Jenny Tan p/98765432 a/111111 u/#01-01 r/N` to add the new customer to the contact list.
+   
+3. [**Edit a customer**](#editing-a-customer--editperson): You realise the unit is number wrong. It should be #02-01.<br>
+    Use `editperson 1 u/#02-01` to edit the contact. (`1` refers to the first customer in the list, i.e. Jenny Tan.)
+
+4. [**Add an order**](#adding-an-order-addorder): The customer orders: 
+   * Caesar Salad x1
+   * Cafe Latte x2
+   From the [menu](#menu), you check the item numbers:
+   * Caesar Salad: item 5
+   * Cafe Latte: item 8
+   Use `addorder c/1 o/5 1 o/8 2` to add the order.
+   
+5. [**List all orders**](#listing-all-orders--listorder): Use `listorder` to see all orders.
+
+6. [**Edit an order**](#editing-an-order--editorder): The customer changes Caesar Salad (item 5) to Smoked Salmon Bagel (item 6).<br>
+    Use `editorder 1 o/5 0 o/6 1` to edit the order. (`1` refers to the first order in the list.)
+
+7. [**Delete an order**](#deleting-an-order--deleteorder): Once the order is completed, use `deleteorder` to delete the order.
+
+8. [**Exit**](#exiting-the-program--exit): Use `exit` to close the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,6 +111,8 @@ Notes about the format:
 
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### **Customer Management Commands**
 
 #### Customer contacts
@@ -105,6 +144,7 @@ Adds a customer to the address book.
 
 Format: `addperson n/NAME p/PHONE_NUMBER a/POSTAL_CODE [u/UNIT_NUMBER] r/REGION [t/TAG]…​`
 
+* Adding a unit number is optional.
 * A customer can have zero or more tags.
 
 Examples:
@@ -151,7 +191,7 @@ Examples:
 * `editperson 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `editperson 3 a/123456 u/` edits the postal code of the 3rd person to be `123456` and clears the existing unit number.
 
-#### Locating customers by region: `findperson`
+#### Finding customers by region: `findperson`
 
 Finds people who live in one of the given regions.
 
@@ -165,6 +205,7 @@ Examples:
 * `findperson N` displays customers who live in region `N`.
 * `findperson NE W` displays customers who live in either region `NE` or `W`.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### **Order Management Commands** 
 
@@ -248,6 +289,8 @@ Examples:
 *  `editorder 1 o/1 1 o/2 4` edits the 1st order in the list to include 1 unit of menu item 1 and 4 units of menu item 2.
 *  `editorder 2 o/3 0` edits the 2nd order to remove menu item 3 from the order.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### **General Commands**
 
 #### Viewing help : `help`
@@ -310,17 +353,6 @@ Food Bridge data is stored as a JSON file `[JAR file location]/data/addressbook.
 If your changes are invalid, Food Bridge will discard all data and start with an empty data file on the next run. Hence, it is recommended to back up the file before editing it.<br>
 Furthermore, certain edits may cause Food Bridge to behave in unexpected ways (e.g., if a value is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
---------------------------------------------------------------------------------------------------------------------
-
-## Example Workflow
-1. [**Add a person**](#adding-a-person-addperson): Use `addperson` to add a new person to the contact list. 
-1. [**Edit a person**](#editing-a-person--editperson): Use `editperson` to edit the contact. 
-1. [**Add an order**](#adding-an-order-addorder): Use `addperson` to add an order. Tag it to the person created. 
-1. [**Edit an order**](#editing-an-order--editorder): Use `editorder` to edit the order. 
-1. [**Delete an order**](#deleting-an-order--deleteorder): Use `deleteorder` to delete the order. 
-1. [**Clear all data**](#clearing-all-entries--clear): Use `clear` to clear all data. 
-1. [**Exit**](#exiting-the-program--exit): Use `exit` to exit the application. 
 
 --------------------------------------------------------------------------------------------------------------------
 
