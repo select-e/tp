@@ -1,8 +1,6 @@
 package seedu.address.logic.commands.order;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
-import static seedu.address.model.Model.PREDICATE_SHOW_CURR_ORDERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_PAST_ORDERS;
 
 import javafx.collections.ObservableList;
