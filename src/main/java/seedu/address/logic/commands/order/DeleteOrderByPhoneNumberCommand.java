@@ -16,7 +16,8 @@ public class DeleteOrderByPhoneNumberCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteorderbyphone";
 
-    public static final String MESSAGE_DELETE_ORDERS_BY_PHONE_SUCCESS = "Deleted %1$d order(s) with given phone number.";
+    public static final String MESSAGE_DELETE_ORDERS_BY_PHONE_SUCCESS = "Deleted %1$d order(s) with given phone "
+            + "number.";
     public static final String MESSAGE_NO_ORDER_WITH_PHONE = "No orders found with given phone number.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all orders matching the provided customer phone number.\n"

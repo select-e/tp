@@ -28,9 +28,9 @@ import seedu.address.logic.commands.person.EditPersonCommand.EditPersonDescripto
 import seedu.address.logic.commands.person.FindPersonCommand;
 import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.PhoneNumberPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RegionContainsKeywordsPredicate;
-import seedu.address.model.order.PhoneNumberPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
