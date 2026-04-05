@@ -221,12 +221,12 @@ public class AddOrderCommandTest {
 
         @Override
         public String getUndoCommandText() {
-            throw new AssertionError();
+            throw new AssertionError("getUndoCommandText should not be called.");
         }
 
         @Override
         public String getRedoCommandText() {
-            throw new AssertionError();
+            throw new AssertionError("getRedoCommandText should not be called.");
         }
 
         @Override
