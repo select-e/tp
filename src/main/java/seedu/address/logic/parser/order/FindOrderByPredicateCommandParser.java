@@ -14,7 +14,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.PhoneNumberPredicate;
+import seedu.address.model.order.RegionPredicate;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Region;
 
 /**
  * Parses input arguments for the {@code findorder} command and creates a
@@ -50,8 +52,8 @@ public class FindOrderByPredicateCommandParser implements Parser<FindOrderByPhon
             return new FindOrderByPhoneNumberCommand(new PhoneNumberPredicate(phone.value));
         }
 
-        // TODO: implement r/ handling when find-by-region is available.
-        throw new ParseException("Finding orders by region is not implemented yet.");
+        Region region = ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get());
+        return new FindOrderByPhoneNumberCommand(new RegionPredicate(region));
     }
 
     /**

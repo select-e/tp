@@ -2,32 +2,35 @@ package seedu.address.logic.commands.order;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.order.PhoneNumberPredicate;
+import seedu.address.model.order.OrderMap;
 
 /**
- * Finds and lists all active orders in address book whose customer's phone number matches the given phone number.
+ * Finds and lists all active orders in address book that match the given predicate.
  */
 public class FindOrderByPhoneNumberCommand extends Command {
 
     public static final String COMMAND_WORD = "findorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all orders whose customer's phone number matches the given phone number "
-            + "and displays them as a list with index numbers.\n"
-            + "Parameters: p/PHONE\n"
-            + "Example: " + COMMAND_WORD + " p/90813212";
+            + ": Finds all active orders that match the given criteria and displays them as a list "
+            + "with index numbers.\n"
+            + "Parameters: p/PHONE | r/REGION (only one prefix allowed)\n"
+            + "Example: " + COMMAND_WORD + " p/90813212\n"
+            + "Example: " + COMMAND_WORD + " r/N";
 
-    private final PhoneNumberPredicate predicate;
+    private final Predicate<OrderMap> predicate;
 
     /**
-     * Creates a command to find active orders by customer phone number.
+     * Creates a command to find active orders by predicate.
      */
-    public FindOrderByPhoneNumberCommand(PhoneNumberPredicate predicate) {
+    public FindOrderByPhoneNumberCommand(Predicate<OrderMap> predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
     }
