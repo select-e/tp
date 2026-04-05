@@ -20,7 +20,7 @@ public class ListPastOrderCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all completed/cancelled orders";
 
-    public static final String MESSAGE_NO_ORDERS = "No orders found";
+    public static final String MESSAGE_NO_ORDERS = "No completed or cancelled orders found";
 
     public ListPastOrderCommand() {}
 

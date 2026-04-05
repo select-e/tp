@@ -20,7 +20,7 @@ public class ListCurrOrderCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all incomplete orders";
 
-    public static final String MESSAGE_NO_ORDERS = "No orders found";
+    public static final String MESSAGE_NO_ORDERS = "No active orders found";
 
     public ListCurrOrderCommand() {}
 
