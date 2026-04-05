@@ -35,5 +35,31 @@ public class RegionPredicateTest {
         OrderMap completedOrder = new OrderBuilder().withPerson(person).build().markAsCompleted();
         assertFalse(predicate.test(completedOrder));
     }
-}
 
+    @Test
+    public void equals_returnsTrueWhenSameRegion() {
+        RegionPredicate first = new RegionPredicate(new Region("N"));
+        RegionPredicate second = new RegionPredicate(new Region("N"));
+        assertTrue(first.equals(second));
+    }
+
+    @Test
+    public void equals_returnsFalseWhenDifferentRegion() {
+        RegionPredicate first = new RegionPredicate(new Region("N"));
+        RegionPredicate second = new RegionPredicate(new Region("E"));
+        assertFalse(first.equals(second));
+    }
+
+    @Test
+    public void equals_returnsFalseWhenDifferentType() {
+        RegionPredicate predicate = new RegionPredicate(new Region("N"));
+        assertFalse(predicate.equals(1));
+    }
+
+    @Test
+    public void toString_returnsExpected() {
+        RegionPredicate predicate = new RegionPredicate(new Region("N"));
+        String expected = RegionPredicate.class.getCanonicalName() + "{region=" + new Region("N") + "}";
+        assertTrue(predicate.toString().equals(expected));
+    }
+}

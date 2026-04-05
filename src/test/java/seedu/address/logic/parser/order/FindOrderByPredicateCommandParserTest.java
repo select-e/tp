@@ -50,4 +50,10 @@ public class FindOrderByPredicateCommandParserTest {
         assertParseSuccess(parser, " r/N", expectedFindCommand);
         assertParseSuccess(parser, " \n r/N \t", expectedFindCommand);
     }
+
+    @Test
+    public void parse_bothPrefixes_throwsParseException() {
+        assertParseFailure(parser, " p/94351253 r/N",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderByPhoneNumberCommand.MESSAGE_USAGE));
+    }
 }
