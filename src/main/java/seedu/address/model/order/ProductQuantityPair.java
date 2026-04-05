@@ -33,7 +33,7 @@ public class ProductQuantityPair implements Comparable<ProductQuantityPair> {
         }
 
         if (!Quantity.isValidQuantity(quantity)) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(Quantity.MESSAGE_CONSTRAINTS_NONNEGATIVE);
         }
 
         this.product = Messages.MENU.getItem(product);
