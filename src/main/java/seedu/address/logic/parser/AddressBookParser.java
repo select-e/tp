@@ -18,6 +18,7 @@ import seedu.address.logic.commands.order.AddOrderCommand;
 import seedu.address.logic.commands.order.CompleteOrderCommand;
 import seedu.address.logic.commands.order.DeleteOrderCommand;
 import seedu.address.logic.commands.order.EditOrderCommand;
+import seedu.address.logic.commands.order.FindOrderByPhoneNumberCommand;
 import seedu.address.logic.commands.order.ListOrderCommand;
 import seedu.address.logic.commands.person.AddPersonCommand;
 import seedu.address.logic.commands.person.DeletePersonCommand;
@@ -29,6 +30,7 @@ import seedu.address.logic.parser.order.AddOrderCommandParser;
 import seedu.address.logic.parser.order.CompleteOrderCommandParser;
 import seedu.address.logic.parser.order.DeleteOrderCommandParser;
 import seedu.address.logic.parser.order.EditOrderCommandParser;
+import seedu.address.logic.parser.order.FindOrderByPredicateCommandParser;
 import seedu.address.logic.parser.person.AddPersonCommandParser;
 import seedu.address.logic.parser.person.DeletePersonCommandParser;
 import seedu.address.logic.parser.person.EditPersonCommandParser;
@@ -71,8 +73,14 @@ public class AddressBookParser {
         case AddPersonCommand.COMMAND_WORD:
             return new AddPersonCommandParser().parse(arguments);
 
+        case AddOrderCommand.COMMAND_WORD:
+            return new AddOrderCommandParser().parse(arguments);
+
         case EditPersonCommand.COMMAND_WORD:
             return new EditPersonCommandParser().parse(arguments);
+
+        case EditOrderCommand.COMMAND_WORD:
+            return new EditOrderCommandParser().parse(arguments);
 
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments);
@@ -86,11 +94,11 @@ public class AddressBookParser {
         case FindPersonCommand.COMMAND_WORD:
             return new FindPersonCommandParser().parse(arguments);
 
+        case FindOrderByPhoneNumberCommand.COMMAND_WORD:
+            return new FindOrderByPredicateCommandParser().parse(arguments);
+
         case ListPersonCommand.COMMAND_WORD:
             return new ListPersonCommand();
-
-        case EditOrderCommand.COMMAND_WORD:
-            return new EditOrderCommandParser().parse(arguments);
 
         case ListOrderCommand.COMMAND_WORD:
             return new ListOrderCommand();
@@ -107,8 +115,6 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case AddOrderCommand.COMMAND_WORD:
-            return new AddOrderCommandParser().parse(arguments);
         case CompleteOrderCommand.COMMAND_WORD:
             return new CompleteOrderCommandParser().parse(arguments);
 
