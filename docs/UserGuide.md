@@ -198,6 +198,22 @@ Examples:
 *  `editorder 1 o/1 1 o/2 4` Edits the 1st order in the list to include 1 of menu item 1 and 4 of menu item 2.
 *  `editorder 2 o/2 0` Edits the 2nd order to clear the selection of menu item 2.
 
+### Mark an order as completed: `complete`
+
+Mark an existing order in the order list as Completed.
+
+Format: `complete INDEX`
+
+* Marks the order at the specified `INDEX` as completed.
+* The index refers to the index number shown in the displayed order list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+### Clear Order List: `clearorder`
+
+Clears all orders from the order list.
+
+Format: `clearorder`
+
 ### Undoing the last change : `undo`
 
 Undoes the most recent change to the address book.
