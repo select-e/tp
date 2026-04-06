@@ -21,7 +21,7 @@ public class FindOrderByPhoneNumberCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all active orders that match the given criteria and displays them as a list "
             + "with index numbers.\n"
-            + "Parameters: p/PHONE | r/REGION (only one prefix allowed)\n"
+            + "Parameters: [p/PHONE] [r/REGION] (exactly one field must be provided)\n"
             + "Example: " + COMMAND_WORD + " p/90813212\n"
             + "Example: " + COMMAND_WORD + " r/N";
 

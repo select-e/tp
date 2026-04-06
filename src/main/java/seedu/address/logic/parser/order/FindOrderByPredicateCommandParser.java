@@ -26,6 +26,9 @@ import seedu.address.model.person.Region;
  */
 public class FindOrderByPredicateCommandParser implements Parser<Command> {
 
+    private static final String MESSAGE_ONLY_ONE_PREFIX =
+            "Findorder expects either p/PHONE or r/REGION, but not both.";
+
     /**
      * Parses the given {@code String} of arguments in the context of the {@code findorder} command
      * and returns a FindOrderByPhoneNumberCommand or FindOrderByRegionCommand object for execution.
@@ -45,8 +48,7 @@ public class FindOrderByPredicateCommandParser implements Parser<Command> {
         boolean hasRegion = argMultimap.getValue(PREFIX_REGION).isPresent();
 
         if (hasPhone && hasRegion) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderByPhoneNumberCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_ONLY_ONE_PREFIX);
         }
 
         if (hasPhone) {
@@ -61,6 +63,7 @@ public class FindOrderByPredicateCommandParser implements Parser<Command> {
 
         throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderByPhoneNumberCommand.MESSAGE_USAGE));
+
     }
 
     /**
