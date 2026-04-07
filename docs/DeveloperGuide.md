@@ -441,6 +441,11 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Viewing the Help Page
+1. Viewing the help page
+   1. Test case: `help`<br>
+      Expected: A new window opens showing the help page.
+
 ### Adding a person
 
 1. Adding a person while all customers are being shown
@@ -476,10 +481,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `listperson` command. Multiple persons in the list.
     2. Test case: `editperson 1 p/91234567 r/E`<br>
    Expected: First person’s phone number and region are updated.
-    4. Test case: `editperson 2 n/Betsy Crower t/`<br>
+    3. Test case: `editperson 2 n/Betsy Crower t/`<br>
    Expected: Second person’s name is updated and all tags are cleared.
-    5. Test case: `editperson 3 a/123456 u/`<br>
-    Expected: Third person’s address is updated and unit is cleared.
+    4. Test case: `editperson 3 a/123456 u/`<br>
+     Expected: Third person’s address is updated and unit is cleared.
 2. Editing a person with invalid inputs<br>
     1. Test case: `editperson 0 n/John`<br>
     Expected: No person is edited. Error message shown.
@@ -494,8 +499,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List contains persons from different regions.
     2. Test case: `findperson N`<br>
     Expected: Persons in region N are displayed.
-    3. Test case: `findperson NE W`<br>
-    Expected: Persons in region NE or W are displayed.
+    3. Test case: `findperson N NE`<br>
+    Expected: Persons in region N and NE are displayed.
 2. Finding persons with invalid input
     1. Test case: `findperson X`<br>
     Expected: No persons found or error message shown.
@@ -545,6 +550,18 @@ testers are expected to do more *exploratory* testing.
     `editorder`, `editorder x`, `editorder 1`<br>
     Expected: Similar to above.
 
+### Finding order by region
+1. Finding orders with valid regions
+    1. Prerequisites: List contains orders from different regions.
+    2. Test case: `findorder r/N`<br>
+    Expected: Orders in region N are displayed.
+
+### Finding order by phone number
+1. Finding orders with valid phone numbers
+    1. Prerequisites: List contains orders from different customers.
+    2. Test case: `findorder p/98765432`<br>
+    Expected: Orders for customer with phone number 98765432 are displayed.
+
 ### Mark an order as completed
 1. Marking an order as completed
     1. Prerequisites: List all orders using the `listorder` command. Multiple orders in the list.
@@ -555,6 +572,14 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect commands to try:
     `complete`, `complete x`, `complete 999`<br>
     Expected: Similar to above.
+
+### Mark an order as completed by region
+1. Marking orders as completed by region
+    1. Prerequisites: List all orders using the `listorder` command. Multiple orders from different regions in the list.
+    2. Test case: `completeregion r/N`<br>
+    Expected: All orders in region N are marked as completed. Status message reflects the update.
+    3. Test case: `completeregion r/X`<br>
+    Expected: No orders updated. Error message shown.
 
 ### Clearing all orders
 1. Clearing the order list
