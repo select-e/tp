@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.order.OrderMap;
@@ -32,7 +31,7 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label region;
     @FXML
-    private FlowPane items;
+    private Label items;
 
     /**
      * Creates an {@code OrderCard} with the given {@code OrderMap} and index to display.
@@ -46,12 +45,15 @@ public class OrderCard extends UiPart<Region> {
         status.setText("Status: " + order.getStatus());
         datetime.setText("At: " + order.getOrderDatetime());
 
+        StringBuilder itemList = new StringBuilder();
         for (ProductQuantityPair entry : order.getProductQuantityPairs()) {
+            if (itemList.length() > 0) {
+                itemList.append(", ");
+            }
             Product product = entry.getProduct();
             Quantity quantity = entry.getQuantity();
-            String itemLabel;
-            itemLabel = product.getName() + " x" + quantity;
-            items.getChildren().add(new Label(itemLabel));
+            itemList.append(product.getName()).append(" x").append(quantity);
         }
+        items.setText(itemList.toString());
     }
 }
