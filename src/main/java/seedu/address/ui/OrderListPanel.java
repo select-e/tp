@@ -21,7 +21,12 @@ public class OrderListPanel extends UiPart<Region> {
      */
     public OrderListPanel(ObservableList<OrderMap> orderList) {
         super(FXML);
-        orderListView.setItems(orderList);
+        javafx.collections.transformation.SortedList<OrderMap> sortedOrders =
+                new javafx.collections.transformation.SortedList<>(
+                        orderList,
+                        java.util.Comparator.comparing((OrderMap order) -> order.getOrderDatetime().value)
+                                .reversed());
+        orderListView.setItems(sortedOrders);
         orderListView.setCellFactory(listView -> new OrderListViewCell());
     }
 
@@ -42,4 +47,3 @@ public class OrderListPanel extends UiPart<Region> {
         }
     }
 }
-

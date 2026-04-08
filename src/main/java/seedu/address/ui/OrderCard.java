@@ -18,6 +18,8 @@ import seedu.address.model.order.Quantity;
 public class OrderCard extends UiPart<Region> {
 
     private static final String FXML = "OrderListCard.fxml";
+    private static final DateTimeFormatter DISPLAY_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public final OrderMap order;
 
@@ -36,8 +38,6 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private FlowPane statusTags;
 
-    private static final DateTimeFormatter DISPLAY_FORMATTER =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Creates an {@code OrderCard} with the given {@code OrderMap} and index to display.
