@@ -12,6 +12,7 @@ title: Developer Guide
 * Base project structure and several core patterns were adapted from [se-edu AddressBook-Level3 (AB3)](https://github.com/se-edu/addressbook-level3).
 * Undo/redo state-management logic was reused and adapted from [se-edu AddressBook-Level4 (AB4)](https://github.com/se-edu/addressbook-level4), primarily in `VersionedAddressBook` and related model integration.
 * Some JavaFX-related code ideas were adapted from Marco Jakob's tutorial: [JavaFX 8 Tutorial](http://code.makery.ch/library/javafx-8-tutorial/).
+* Markdown rendering support uses the [CommonMark Java library](https://github.com/commonmark/commonmark-java), including `org.commonmark:commonmark` and `org.commonmark:commonmark-ext-gfm-tables`.
 * Libraries used: JavaFX, Jackson, JUnit5.
 
 --------------------------------------------------------------------------------------------------------------------
