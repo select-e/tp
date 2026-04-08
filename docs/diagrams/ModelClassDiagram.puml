@@ -36,7 +36,7 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
-VersionedAddressBook .up.|> AddressBook
+VersionedAddressBook -up-|> AddressBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
