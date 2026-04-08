@@ -298,8 +298,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`  | restaurant delivery worker| list current and past orders                             | separate active orders from completed ones.                           |
 | `* *`  | user                      | undo or redo recent changes                              | recover from accidental edits or deletions.                           |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `Food Bridge` and the **Actor** is the `user`, unless specified otherwise)
