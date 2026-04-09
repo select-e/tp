@@ -104,19 +104,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
-
-        List<OrderMap> affectedOrders = new ArrayList<>();
-        for (OrderMap order : orders.asUnmodifiableObservableList()) {
-            if (order.getPerson().isSamePerson(target)) {
-                affectedOrders.add(order);
-            }
-        }
-
-        for (OrderMap order : affectedOrders) {
-            OrderMap updatedOrder = new OrderMap(order.getOrderId(), editedPerson,
-                    order.getProductQuantityPairs(), order.getStatus(), order.getOrderDatetime());
-            orders.setOrder(order, updatedOrder);
-        }
+        orders.setPerson(target, editedPerson);
     }
 
     /**
@@ -125,6 +113,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes all orders associated with {@code person}.
+     */
+    public void removeOrdersForPerson(Person person) {
+        requireNonNull(person);
+        List<OrderMap> ordersToRemove = new ArrayList<>(orders.asUnmodifiableObservableList());
+        for (OrderMap order : ordersToRemove) {
+            if (order.getPerson().isSamePerson(person)) {
+                orders.remove(order);
+            }
+        }
     }
 
     //@@author Achiack
