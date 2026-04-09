@@ -51,6 +51,7 @@ public class OrderCard extends UiPart<Region> {
         customer.setText(order.getPerson().getName().fullName);
         region.setText(order.getPerson().getRegion().toLabel());
         region.setStyle("-fx-background-color: " + order.getPerson().getRegion().getColour());
+        status.setText("Status: " + order.getStatus());
         phone.setText("Phone number: " + order.getPerson().getPhone().value);
         datetime.setText("At: " + order.getOrderDatetime().value.format(DISPLAY_FORMATTER));
 

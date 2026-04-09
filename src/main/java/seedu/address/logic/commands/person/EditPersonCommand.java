@@ -54,6 +54,7 @@ public class EditPersonCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
+            + PREFIX_ORDERS + "1 1 "
             + PREFIX_TAG + "member";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Contact edited successfully.\n%1$s";
