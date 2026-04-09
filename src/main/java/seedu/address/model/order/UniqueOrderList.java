@@ -70,6 +70,10 @@ public class UniqueOrderList implements Iterable<OrderMap> {
         internalList.set(index, editedOrder);
     }
 
+    /**
+     * Edits the order belonging to person {@code target} in the order list
+     * to belong to {@code editedPerson} instead.
+     */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
