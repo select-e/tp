@@ -235,6 +235,16 @@ public class AddPersonCommandTest {
         public void commitAddressBook(String commandText) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public seedu.address.model.VersionedAddressBook.Snapshot createAddressBookSnapshot() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreAddressBookSnapshot(seedu.address.model.VersionedAddressBook.Snapshot snapshot) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
