@@ -225,7 +225,17 @@ public class AddOrderCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public String getUndoCommandText() {
+            throw new AssertionError("getUndoCommandText should not be called.");
+        }
+
+        @Override
+        public String getRedoCommandText() {
+            throw new AssertionError("getRedoCommandText should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook(String commandText) {
             throw new AssertionError();
         }
 
