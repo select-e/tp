@@ -2,14 +2,17 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -27,6 +30,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final boolean shouldAutoFitWindowOnStartup;
 
     private Stage primaryStage;
     private Logic logic;
@@ -44,16 +48,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private VBox personList;
+    private Label activeEntityLabel;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
-    private VBox orderList;
-
-    @FXML
-    private StackPane orderListPanelPlaceholder;
+    private StackPane entityListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -71,8 +69,11 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        GuiSettings guiSettings = logic.getGuiSettings();
+        shouldAutoFitWindowOnStartup = guiSettings.getWindowCoordinates() == null;
+
         // Configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        setWindowDefaultSize(guiSettings);
 
         setAccelerators();
 
@@ -122,10 +123,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         orderListPanel = new OrderListPanel(logic.getFilteredOrderList());
-        orderListPanelPlaceholder.getChildren().add(orderListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -136,22 +135,33 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        Platform.runLater(() -> {
+            if (shouldAutoFitWindowOnStartup) {
+                fitWindowToSceneOnStartup();
+            } else {
+                expandWindowVerticallyIfNeeded();
+            }
+        });
+
         // Default to showing persons
         showPersonList();
     }
 
     private void showPersonList() {
-        personList.setVisible(true);
-        personList.setManaged(true);
-        orderList.setVisible(false);
-        orderList.setManaged(false);
+        setActiveListPanel(personListPanel.getRoot(), "Customers");
     }
 
     private void showOrderList() {
-        personList.setVisible(false);
-        personList.setManaged(false);
-        orderList.setVisible(true);
-        orderList.setManaged(true);
+        setActiveListPanel(orderListPanel.getRoot(), "Orders");
+    }
+
+
+    /**
+     * Swaps the active entity list in the shared content area.
+     */
+    private void setActiveListPanel(Node panel, String labelText) {
+        entityListPanelPlaceholder.getChildren().setAll(panel);
+        activeEntityLabel.setText(labelText);
     }
 
     /**
@@ -208,6 +218,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            expandWindowVerticallyIfNeeded();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -227,7 +238,48 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            expandWindowVerticallyIfNeeded();
             throw e;
+        }
+    }
+
+    /**
+     * Sizes the initial window to its scene and ensures a portrait-like shape.
+     */
+    private void fitWindowToSceneOnStartup() {
+        if (primaryStage.getScene() == null) {
+            return;
+        }
+
+        Parent sceneRoot = primaryStage.getScene().getRoot();
+        sceneRoot.applyCss();
+        sceneRoot.layout();
+        primaryStage.sizeToScene();
+
+        if (primaryStage.getHeight() <= primaryStage.getWidth()) {
+            primaryStage.setHeight(primaryStage.getWidth() + 1);
+        }
+
+        expandWindowVerticallyIfNeeded();
+    }
+
+    /**
+     * Expands the stage only when current content needs more vertical space.
+     */
+    private void expandWindowVerticallyIfNeeded() {
+        if (primaryStage.getScene() == null) {
+            return;
+        }
+
+        Parent sceneRoot = primaryStage.getScene().getRoot();
+        sceneRoot.applyCss();
+        sceneRoot.layout();
+
+        double requiredContentHeight = sceneRoot.prefHeight(primaryStage.getWidth());
+        double stageDecorationHeight = primaryStage.getHeight() - primaryStage.getScene().getHeight();
+        double requiredStageHeight = requiredContentHeight + stageDecorationHeight;
+        if (requiredStageHeight > primaryStage.getHeight()) {
+            primaryStage.setHeight(requiredStageHeight);
         }
     }
 }

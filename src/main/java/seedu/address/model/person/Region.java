@@ -16,11 +16,11 @@ public class Region {
      * An enumeration for all possible region types.
      */
     public enum RegionType {
-        N("North", "#2C7542"),
-        NE("North East", "#B87F23"),
-        W("West", "#32458A"),
-        E("East", "#8C3B3B"),
-        C("Central", "#7D4B8C");
+        N("North", "#cfeadd"),
+        NE("North East", "#f7e3c5"),
+        W("West", "#d8e2f8"),
+        E("East", "#f6d7d7"),
+        C("Central", "#eadcf3");
 
         public final String label;
         public final String colour;

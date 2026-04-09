@@ -1,28 +1,41 @@
 body {
-    background-color: #383838;
+    background-color: #f7f7f7;
     font-family: "Segoe UI", sans-serif;
     padding: 12px;
-    color: #ffffff;
+    color: #2b2b2b;
 }
 
 h2 {
     font-size: 18px;
+    color: #f25a00;
+    border-bottom: 1px solid #f0d4c3;
+    padding-bottom: 4px;
 }
 
 code {
-    background-color: #4d4d4d;
+    background-color: #fff0e6;
     padding: 2px 4px;
     font-family: Consolas, Menlo, monospace;
     border-radius: 3px;
 }
 
+a {
+    color: #f25a00;
+}
+
 table {
     border-collapse: collapse;
+    background-color: #ffffff;
 }
 
 th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #e9d2c4;
     padding: 8px;
     text-align: left;
     font-size: 14px;
 }
+
+th {
+    background-color: #fdeee5;
+}
+
