@@ -326,6 +326,7 @@ Format: `editorder ORDER_INDEX o/MENU_ITEM QUANTITY [o/MENU_ITEM QUANTITY]…​
   * If it does not exist in the order, it will be added. 
   * If it already exists, its quantity will be updated. 
   * If the specified quantity is `0`, the item will be removed from the order.
+* You cannot edit already completed orders.
 
 Examples:
 *  `editorder 1 o/1 1 o/2 4` edits the 1st order in the list to include 1 unit of menu item 1 and 4 units of menu item 2.
